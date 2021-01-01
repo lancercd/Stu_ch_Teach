@@ -87,6 +87,25 @@ public class StudentServiceImpl {
         tutorStu.setNotice_guide_teacher_content(notice_guide_teacher_content);
         tutorStu.setRead_teacher_id(-1);
 
-        tutorStuDao.addTutorStuDao(tutorStu);
+        tutorStuDao.addTutorStu(tutorStu);
+    }
+
+    /**
+     * 修改 导师学生表 记录，根据导师学生表id
+     * @param tutor_stu_id  导师学生表id
+     * @param tutorStu      导师学生表类
+     */
+    public void updateTutorStu(int tutor_stu_id, TutorStu tutorStu){
+        TutorStuDao tutorStuDao = new TutorStuDao();
+        tutorStuDao.updateTutorStu(tutor_stu_id, tutorStu);
+    }
+
+    /**
+     * 删除 导师学生表 记录，根据导师学生表id
+     * @param tutor_stu_id  导师学生表id
+     */
+    public void deleteTutorStu(int tutor_stu_id){
+        TutorStuDao tutorStuDao = new TutorStuDao();
+        tutorStuDao.deleteTutorStu(tutor_stu_id);
     }
 }

@@ -29,7 +29,7 @@ public class TutorStuDao {
      * 添加记录 到 导师学生表
      * @param tutorStu
      */
-    public void addTutorStuDao(TutorStu tutorStu){
+    public void addTutorStu(TutorStu tutorStu){
         String sql = "insert into tb_jk2_tutor_stu\n" +
                 "(tutor_stu_id,guide_adviser_id,stu_id,stu_self_introduce,email_notice_guide_teacher,\n" +
                 "message_notice_guide_teacher,notice_guide_teacher_content,guide_teacher_check,\n" +
@@ -45,5 +45,36 @@ public class TutorStuDao {
                 tutorStu.getNotice_stu_content(),tutorStu.getRead_teacher_id(),
                 tutorStu.getEmail_notice_read_teacher(),tutorStu.getMessage_notice_read_teacher(),
                 tutorStu.getNotice_read_teacher_content());
+    }
+
+    /**
+     * 修改表 tutorStu，根据表id
+     * @param tutorStu
+     */
+    public void updateTutorStu(int tutor_stu_id, TutorStu tutorStu){
+        String sql = "update tb_jk2_tutor_stu " +
+                "set stu_self_introduce=?,email_notice_guide_teacher=?," +
+                "message_notice_guide_teacher=?,notice_guide_teacher_content=?," +
+                "guide_teacher_check=?,email_notice_stu=?,message_notice_stu=?," +
+                "notice_stu_content=?,read_teacher_id=?,email_notice_read_teacher=?," +
+                "message_notice_read_teacher=?,notice_read_teacher_content=?" +
+                "where tutor_stu_id = ?";
+        template.update(sql,tutorStu.getStu_self_introduce(),
+                tutorStu.getEmail_notice_guide_teacher(),tutorStu.getMessage_notice_guide_teacher(),
+                tutorStu.getNotice_guide_teacher_content(),tutorStu.getGuide_teacher_check(),
+                tutorStu.getEmail_notice_stu(),tutorStu.getMessage_notice_stu(),
+                tutorStu.getNotice_stu_content(),tutorStu.getRead_teacher_id(),
+                tutorStu.getEmail_notice_read_teacher(),tutorStu.getMessage_notice_read_teacher(),
+                tutorStu.getNotice_read_teacher_content(),tutor_stu_id);
+    }
+
+    /**
+     * 删除表tutorStu记录，根据表id
+     * @param tutor_stu_id
+     */
+    public void deleteTutorStu(int tutor_stu_id){
+        String sql = "delete tb_jk2_tutor_stu where tutor_stu_id = ?";
+
+        template.update(sql,tutor_stu_id);
     }
 }
