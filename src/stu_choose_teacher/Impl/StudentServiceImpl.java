@@ -3,15 +3,12 @@ package stu_choose_teacher.Impl;
 import org.springframework.jdbc.core.JdbcTemplate;
 import stu_choose_teacher.dao.GuideAdviserDao;
 import stu_choose_teacher.dao.StudentDao;
-import stu_choose_teacher.domain.GuideAdviser;
-import stu_choose_teacher.domain.GuideAndStudent;
-import stu_choose_teacher.domain.Semester;
-import stu_choose_teacher.domain.Student;
+import stu_choose_teacher.dao.TutorStuDao;
+import stu_choose_teacher.domain.*;
 import stu_choose_teacher.utils.JDBCUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class StudentServiceImpl {
     private JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
@@ -40,5 +37,29 @@ public class StudentServiceImpl {
         }
 
         return guideAndStudents;
+    }
+
+    /**
+     * 根据学生id 查看 学生的选择信息
+     * @param stu_id
+     * @return
+     */
+    public List<ChooseMessage> getChooseMessage(int stu_id){
+        // 根据 学生id 查询 导师学生表
+        List<ChooseMessage> chooseMessages = new ArrayList<ChooseMessage>();
+
+        TutorStuDao tutorStuDao = new TutorStuDao();
+        List<TutorStu> tutorStus = tutorStuDao.getTutorStus(stu_id);
+        GuideAdviserDao guideAdviserDao = new GuideAdviserDao();
+
+        for(TutorStu tutorStu : tutorStus){
+            ChooseMessage chooseMessage = new ChooseMessage();
+            chooseMessage.setTutorStu(tutorStu);
+            GuideAdviser guideAdviser = guideAdviserDao.getGuideAdviser(tutorStu.getGuide_adviser_id());
+            chooseMessage.setGuideAdviser(guideAdviser);
+            chooseMessages.add(chooseMessage);
+        }
+
+        return chooseMessages;
     }
 }

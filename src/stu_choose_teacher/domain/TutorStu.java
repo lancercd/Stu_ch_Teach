@@ -1,7 +1,7 @@
 package stu_choose_teacher.domain;
 
 /**
- * 导师学生表
+ * 导师学生表 tb_jk2_tutor_stu
  */
 public class TutorStu {
     private int tutor_stu_id;       // id
