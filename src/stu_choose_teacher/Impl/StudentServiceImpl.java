@@ -62,4 +62,31 @@ public class StudentServiceImpl {
 
         return chooseMessages;
     }
+
+    /**
+     * 学生选择指导教师
+     * 选择时可填写自我介绍
+     * 选择后可使用短信或邮件通知教师
+     * @param stu_id    学生表id
+     * @param guide_adviser_id  指导老师表id
+     * @param stu_self_introduce    自我介绍
+     * @param email_notice_guide_teacher    邮件通知指导教师（默认0）
+     * @param message_notice_guide_teacher  短信通知指导教师（默认0）
+     * @param notice_guide_teacher_content  通知指导教师内容
+     */
+    public void chooseGuide(int stu_id,int guide_adviser_id,String stu_self_introduce,int email_notice_guide_teacher,
+                            int message_notice_guide_teacher, String notice_guide_teacher_content){
+        TutorStu tutorStu = new TutorStu();
+        TutorStuDao tutorStuDao = new TutorStuDao();
+
+        tutorStu.setStu_id(stu_id);
+        tutorStu.setGuide_adviser_id(guide_adviser_id);
+        tutorStu.setStu_self_introduce(stu_self_introduce);
+        tutorStu.setEmail_notice_guide_teacher(email_notice_guide_teacher);
+        tutorStu.setMessage_notice_guide_teacher(message_notice_guide_teacher);
+        tutorStu.setNotice_guide_teacher_content(notice_guide_teacher_content);
+        tutorStu.setRead_teacher_id(-1);
+
+        tutorStuDao.addTutorStuDao(tutorStu);
+    }
 }

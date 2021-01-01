@@ -24,4 +24,26 @@ public class TutorStuDao {
 
         return tutorStus;
     }
+
+    /**
+     * 添加记录 到 导师学生表
+     * @param tutorStu
+     */
+    public void addTutorStuDao(TutorStu tutorStu){
+        String sql = "insert into tb_jk2_tutor_stu\n" +
+                "(tutor_stu_id,guide_adviser_id,stu_id,stu_self_introduce,email_notice_guide_teacher,\n" +
+                "message_notice_guide_teacher,notice_guide_teacher_content,guide_teacher_check,\n" +
+                "email_notice_stu,message_notice_stu,notice_stu_content,read_teacher_id,\n" +
+                "email_notice_read_teacher,message_notice_read_teacher,notice_read_teacher_content) \n" +
+                "VALUES\n" +
+                "(NULL,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+        template.update(sql,tutorStu.getGuide_adviser_id(),tutorStu.getStu_id(),tutorStu.getStu_self_introduce(),
+                tutorStu.getEmail_notice_guide_teacher(),tutorStu.getMessage_notice_guide_teacher(),
+                tutorStu.getNotice_guide_teacher_content(),tutorStu.getGuide_teacher_check(),
+                tutorStu.getEmail_notice_stu(),tutorStu.getMessage_notice_stu(),
+                tutorStu.getNotice_stu_content(),tutorStu.getRead_teacher_id(),
+                tutorStu.getEmail_notice_read_teacher(),tutorStu.getMessage_notice_read_teacher(),
+                tutorStu.getNotice_read_teacher_content());
+    }
 }
