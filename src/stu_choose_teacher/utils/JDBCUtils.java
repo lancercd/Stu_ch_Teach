@@ -1,4 +1,4 @@
-package utils;
+package stu_choose_teacher.utils;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 
