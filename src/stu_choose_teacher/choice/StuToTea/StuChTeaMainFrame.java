@@ -1,11 +1,17 @@
 package stu_choose_teacher.choice.StuToTea;
 
+
+
 import stu_choose_teacher.config.Config;
 
 import javax.swing.*;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
 
 public class StuChTeaMainFrame extends JFrame {
+    JSplitPane sp = null;
 
     public StuChTeaMainFrame(){
         this.init();
@@ -36,54 +42,8 @@ public class StuChTeaMainFrame extends JFrame {
     }
 
 
-    /**
-     * 创建菜单栏按钮
-     */
-//    private JPanel createMenuBtns(int width, int height){
-//        String[] btnsText = Config.MENU_BTNS;
-//        JPanel container = new JPanel();
-//        container.setBackground(Color.GREEN);
-////        container.setLayout(new FlowLayout(FlowLayout.CENTER));
-//        container.setLayout(new GridLayout(btnsText.length, 1));
-//        container.setSize(width, height);
-//        //Config.MENU_BTN_HEIGHT * btnsText.length
-//
-//
-//        for(String text : btnsText){
-//            JPanel c = new JPanel();
-//            c.setSize(300, 50);
-//            JButton button = new JButton(text);
-//            c.add(button);
-//            container.add(c);
-//        }
-//        return container;
-//    }
     private Component createMenuBtns(){
-        String[] btnsText = Config.MENU_BTNS;
-        JTabbedPane tab = new JTabbedPane(SwingConstants.LEFT, JTabbedPane.SCROLL_TAB_LAYOUT);
-
-        for(String btn : btnsText){
-//            tab.addTab(btn, );
-        }
-
-
-        return tab;
-    }
-
-    private JPanel createUserInfoPanel(int width, int height){
-        JPanel userInfoPanel = new JPanel();
-        userInfoPanel.setSize(width, height);
-        userInfoPanel.setBackground(Color.BLACK);
-//        userInfoPanel.setLayout(new GridLayout(2,1));
-        userInfoPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-
-        Label username = new Label("lc");
-        username.setFont(new Font("黑体", Font.BOLD, 20));
-        Label user_number = new Label("1311282756wwo");
-
-        userInfoPanel.add(username);
-        userInfoPanel.add(user_number);
-        return userInfoPanel;
+        return null;
     }
 
 
@@ -91,36 +51,52 @@ public class StuChTeaMainFrame extends JFrame {
      * 左边菜单栏内容
      * @return Component
      */
-    private JPanel createLeftBar(){
-        JPanel leftBar = new JPanel();
+    private Component createLeftBar(){
+        String[] btnsText = Config.MENU_BTNS;
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("管理");
+        for(String text : btnsText){
+            DefaultMutableTreeNode node = new DefaultMutableTreeNode(text);
+            root.add(node);
+        }
+        JTree tree = new JTree(root);
+        tree.addTreeSelectionListener(new TreeSelectionListener() {
+            @Override
+            public void valueChanged(TreeSelectionEvent e) {
+                Object lastPathComponent = e.getNewLeadSelectionPath().getLastPathComponent();
 
-
-        leftBar.setBackground(Color.blue);
-        leftBar.setLayout(null);
-
-//        leftBar.add(createUserInfoPanel(250,80));
-//        leftBar.add(createUserInfoPanel(250,80));
-        leftBar.add(createMenuBtns());
-        return leftBar;
+                createNewFrame(lastPathComponent.toString());
+            }
+        });
+        return tree;
     }
 
     private void conponentsInit(){
 
         //分为左右两边
-//        JSplitPane sp = new JSplitPane();
-//        sp.setContinuousLayout(true);
-//        sp.setDividerLocation(Config.LEFT_BAR_WEIGHT);
-//        sp.setDividerSize(Config.DIVIDER_SIZE);
-//
-//
-//        JPanel rightBar = new JPanel();
+        sp = new JSplitPane();
+        sp.setContinuousLayout(true);
+        sp.setDividerLocation(Config.LEFT_BAR_WEIGHT);
+        sp.setDividerSize(Config.DIVIDER_SIZE);
+
+        JPanel rightBar = new JPanel();
 
 
-//        sp.setLeftComponent(createLeftBar());
-//        sp.setLeftComponent(createLeftBar());
-//        sp.setRightComponent(rightBar);
-//        this.add(sp);
+        sp.setLeftComponent(createLeftBar());
+        sp.setRightComponent(rightBar);
+        this.add(sp);
     }
+
+
+    /**
+     * 创建窗口组件到右边
+     * @param flag
+     */
+    private void createNewFrame(String flag){
+        //sp.setRightComponent();
+//        点击窗口
+        System.out.println(flag);
+    }
+
 
 
 
@@ -137,4 +113,20 @@ public class StuChTeaMainFrame extends JFrame {
     public static void main(String[] args) {
         new StuChTeaMainFrame();
     }
+
+
+
+//    private class MenuBtnRenderer extends DefaultTreeCellRenderer {
+//        private Image rootIcon = null;
+//
+//        public MenuBtnRenderer(){
+//            rootIcon = ImageIO.read();
+//        }
+//
+//        @Override
+//        public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
+//            return super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
+//        }
+//    }
 }
+
