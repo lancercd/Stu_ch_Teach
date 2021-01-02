@@ -1,6 +1,10 @@
 package stu_choose_teacher.choice.StuToTea.components;
 
 
+import stu_choose_teacher.Impl.StudentServiceImpl;
+import stu_choose_teacher.domain.GuideAndStudent;
+import stu_choose_teacher.domain.Semester;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -49,25 +53,31 @@ public class CheckTeaChStu extends Box {
         vh.add("姓名");
         vh.add("年龄");
 
-        //表数据---多行多列，二维
         Vector< Vector<Object> > vd = new Vector<Vector<Object>>();
-        //第一行数据
-        Vector<Object> d1 = new Vector<Object>();
-        d1.add("Jack");
-        d1.add(23);
-        //第二行数据
-        Vector<Object> d2 = new Vector<Object>();
-        d2.add("张三");
-        d2.add(22);
-        //把d1,d2添加到vd
-        vd.add(d1);
-        vd.add(d2);
+
+
+        vd = requestData();
 
         final DefaultTableModel dtm = new DefaultTableModel(vd,vh);
         final JTable table = new JTable(dtm);
         this.add( new JScrollPane(table) ); //要用JScrollPane包才会显示出表头
         System.out.println(vd);
         setVisible(true);
+    }
+
+    public Vector<Vector<Object>> requestData(){
+        Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+        StudentServiceImpl stu = new StudentServiceImpl();
+        Semester semester = new Semester();
+        semester.setSemester_id(1);
+        List<GuideAndStudent> guideAndStudents = stu.getGuideAndStudents(semester);
+
+        for(GuideAndStudent ele : guideAndStudents){
+            Vector<Object> row = ele.dataFormat();
+            data.add(row);
+        }
+        return data;
+
     }
 
 }

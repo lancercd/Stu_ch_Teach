@@ -98,7 +98,7 @@ public class StuChTeaMainFrame extends JFrame {
 //        点击窗口
         //System.out.println(flag);
 
-        sp.setRightComponent(new CheckTeaChStu());
+        sp.setRightComponent(new Test());
 
     }
 

@@ -53,7 +53,7 @@ public class Test extends Box {
             }
         };
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.add(table);
+        this.add( new JScrollPane(table) ); //要用JScrollPane包才会显示出表头
     }
 
 
