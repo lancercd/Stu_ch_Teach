@@ -1,6 +1,6 @@
 package stu_choose_teacher.dao;
 
-import org.junit.jupiter.api.Test;
+
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import stu_choose_teacher.domain.GuideAdviser;
