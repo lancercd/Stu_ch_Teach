@@ -1,6 +1,7 @@
 package stu_choose_teacher.domain;
 
 import java.util.List;
+import java.util.Vector;
 
 /**
  * 指导老师以及已经选择的学生信息
@@ -31,5 +32,17 @@ public class GuideAndStudent {
                 "guideAdviser=" + guideAdviser +
                 ", students=" + students +
                 '}';
+    }
+
+
+    public Vector<Object> dataFormat(){
+        Vector<Object> data = new Vector<Object>();
+        data.add(guideAdviser.getTeacher_number());
+        data.add(guideAdviser.getTeacher_name());
+        for(Student stu : students){
+            data.add(stu.getStu_name());
+        }
+        return data;
+
     }
 }

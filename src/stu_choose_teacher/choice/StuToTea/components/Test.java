@@ -13,21 +13,55 @@ import java.util.Vector;
 
 public class Test extends Box {
 
+    String[] title = {"111", "222"};
+
     final int WIDTH = 850;
-    final int HEIGHT = 600;
+    final int HEIGHT = 50;
 
     private JTable table;
     private Vector<String> titles;
-    private Vector<Vector> tableData;
+    private Vector<Vector<Object>> tableData;
     private TableModel tableModel;
 
 
     public Test() {
         super(BoxLayout.Y_AXIS);
+        initComponent();
+        initTable();
+
+    }
+
+
+    public void initTable(){
+        tableData = new Vector<Vector<Object>>();
+
+
+        titles = new Vector<String>();
+        titles.add("ok");
+        titles.add("123");
+        Vector<String> vh = new Vector<String>();
+        vh.add("姓名");
+        vh.add("年龄");
+        tableData = requestData();
+
+        tableModel = new DefaultTableModel(tableData, vh);
+        table = new JTable(tableModel){
+
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.add(table);
+    }
+
+
+    public void initComponent(){
         JPanel btnPanel = new JPanel();
-        Color color = new Color(203, 220, 217);
-        btnPanel.setBackground(color);
-        btnPanel.setMaximumSize(new Dimension(WIDTH, 80));
+//        Color color = new Color(203, 220, 217);
+//        btnPanel.setBackground(color);
+        btnPanel.setMaximumSize(new Dimension(WIDTH, HEIGHT));
 
         btnPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
@@ -41,38 +75,21 @@ public class Test extends Box {
         btnPanel.add(delBtn);
 
         this.add(btnPanel);
-        String[] ts = {"111", "222", "333", "444" , "555"};
-        titles = new Vector<>();
-        for(String title : ts){
-            titles.add(title);
-
-        }
-
-        tableData = new Vector<>();
-        tableModel = new DefaultTableModel(tableData, titles);
-        table = new JTable(tableModel){
-
-            @Override
-            public boolean isCellEditable(int row, int column){
-                return false;
-            }
-        };
-
-        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        requestData();
-        this.add(table);
     }
 
 
-    public void requestData(){
+    public Vector<Vector<Object>> requestData(){
+        Vector<Vector<Object>> data = new Vector<Vector<Object>>();
         StudentServiceImpl stu = new StudentServiceImpl();
         Semester semester = new Semester();
         semester.setSemester_id(1);
-//        List<GuideAndStudent> guideAndStudents = stu.getGuideAndStudents(semester);
-        tableData.clear();
-//        for(GuideAndStudent ele : guideAndStudents){
-//            System.out.println(ele);
-//        }
+        List<GuideAndStudent> guideAndStudents = stu.getGuideAndStudents(semester);
+
+        for(GuideAndStudent ele : guideAndStudents){
+            Vector<Object> row = ele.dataFormat();
+            data.add(row);
+        }
+        return data;
 
     }
 

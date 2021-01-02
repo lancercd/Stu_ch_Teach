@@ -1,5 +1,7 @@
 package stu_choose_teacher.domain;
 
+import java.util.Vector;
+
 /**
  * 指导教师表tb_jk2_guide_adviser
  */

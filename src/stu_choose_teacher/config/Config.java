@@ -2,7 +2,7 @@ package stu_choose_teacher.config;
 
 public class Config {
     //窗体title
-    public static final String FRAME_TITLE = "老师选择学生";
+    public static final String FRAME_TITLE = "学生选择老师";
 
     //窗体默认宽度 px
     public static final int FRAME_INIT_WEIGHT = 1500;

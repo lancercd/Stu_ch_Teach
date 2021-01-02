@@ -2,6 +2,7 @@ package stu_choose_teacher.choice.StuToTea;
 
 
 
+import stu_choose_teacher.choice.StuToTea.components.CheckTeaChStu;
 import stu_choose_teacher.choice.StuToTea.components.Test;
 import stu_choose_teacher.config.Config;
 
@@ -97,7 +98,7 @@ public class StuChTeaMainFrame extends JFrame {
 //        点击窗口
         //System.out.println(flag);
 
-        sp.setRightComponent(new Test());
+        sp.setRightComponent(new CheckTeaChStu());
 
     }
 
