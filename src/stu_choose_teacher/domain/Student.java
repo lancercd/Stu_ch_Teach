@@ -5,7 +5,7 @@ package stu_choose_teacher.domain;
  */
 public class Student {
     private int stu_id;     // 学生表id
-    private int stu_number; // 学号
+    private String stu_number; // 学号
     private String stu_name;    // 学生姓名
     private String stu_password;    // 学生密码
 
@@ -17,11 +17,11 @@ public class Student {
         this.stu_id = stu_id;
     }
 
-    public int getStu_number() {
+    public String getStu_number() {
         return stu_number;
     }
 
-    public void setStu_number(int stu_number) {
+    public void setStu_number(String stu_number) {
         this.stu_number = stu_number;
     }
 
