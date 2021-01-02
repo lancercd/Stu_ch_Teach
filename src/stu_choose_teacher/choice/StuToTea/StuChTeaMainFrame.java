@@ -2,6 +2,7 @@ package stu_choose_teacher.choice.StuToTea;
 
 
 
+import stu_choose_teacher.choice.StuToTea.components.Test;
 import stu_choose_teacher.config.Config;
 
 import javax.swing.*;
@@ -82,7 +83,7 @@ public class StuChTeaMainFrame extends JFrame {
 
 
         sp.setLeftComponent(createLeftBar());
-        sp.setRightComponent(rightBar);
+        sp.setRightComponent(new Test());
         this.add(sp);
     }
 
@@ -94,7 +95,10 @@ public class StuChTeaMainFrame extends JFrame {
     private void createNewFrame(String flag){
         //sp.setRightComponent();
 //        点击窗口
-        System.out.println(flag);
+        //System.out.println(flag);
+
+        sp.setRightComponent(new Test());
+
     }
 
 
