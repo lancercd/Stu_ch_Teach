@@ -48,6 +48,7 @@ public class GuideAndStudent {
     public Vector<Object> dataFormat(){
         Vector<Object> data = new Vector<Object>();
         Vector<String> stuNames = new Vector<String>();
+        data.add(guideAdviser.getGuide_adviser_id());
         data.add(guideAdviser.getTeacher_number());
         data.add(guideAdviser.getTeacher_name());
 
