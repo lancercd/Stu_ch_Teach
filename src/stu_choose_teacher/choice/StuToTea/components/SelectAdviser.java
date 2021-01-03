@@ -5,6 +5,7 @@ import stu_choose_teacher.Impl.StudentServiceImpl;
 import stu_choose_teacher.domain.GuideAndStudent;
 import stu_choose_teacher.domain.Semester;
 import stu_choose_teacher.domain.Student;
+import stu_choose_teacher.utils.TableUtil;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -53,6 +54,7 @@ public class SelectAdviser extends Box {
 
         final DefaultTableModel dtm = new DefaultTableModel(vd,vh);
         final JTable table = new JTable(dtm);
+        TableUtil.tableFace(table);
         this.add( new JScrollPane(table) ); //要用JScrollPane包才会显示出表头
         System.out.println(vd);
         setVisible(true);

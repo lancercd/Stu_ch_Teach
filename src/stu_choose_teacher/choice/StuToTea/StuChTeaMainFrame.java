@@ -12,6 +12,7 @@ import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -159,17 +160,17 @@ public class StuChTeaMainFrame extends JFrame {
 
 
 
-//    private class MenuBtnRenderer extends DefaultTreeCellRenderer {
-//        private Image rootIcon = null;
-//
+    private class MenuBtnRenderer extends DefaultTreeCellRenderer {
+        private Image rootIcon = null;
+
 //        public MenuBtnRenderer(){
 //            rootIcon = ImageIO.read();
 //        }
-//
-//        @Override
-//        public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
-//            return super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
-//        }
-//    }
+
+        @Override
+        public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
+            return super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
+        }
+    }
 }
 

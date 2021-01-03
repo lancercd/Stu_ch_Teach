@@ -6,6 +6,7 @@ import stu_choose_teacher.dao.SemesterDao;
 import stu_choose_teacher.domain.GuideAndStudent;
 import stu_choose_teacher.domain.Semester;
 import stu_choose_teacher.domain.Student;
+import stu_choose_teacher.utils.TableUtil;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -65,6 +66,8 @@ public class CheckAllAdviser extends Box {
 
         tableModel = new DefaultTableModel(tableData, vh);
         table.setModel(tableModel);
+        TableUtil.tableFace(table);
+
 
 
         //表格点击事件

@@ -3,6 +3,7 @@ package stu_choose_teacher.choice.StuToTea.components;
 import stu_choose_teacher.Impl.StudentServiceImpl;
 import stu_choose_teacher.domain.ChooseMessage;
 import stu_choose_teacher.domain.Student;
+import stu_choose_teacher.utils.TableUtil;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -63,6 +64,7 @@ public class CheckStuChooseMessage extends Box {
 
         tableModel = new DefaultTableModel(tableData, vh);
         table.setModel(tableModel);
+        TableUtil.tableFace(table);
     }
 
     private Vector<String> getTableTitle(){

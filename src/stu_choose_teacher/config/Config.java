@@ -18,9 +18,6 @@ public class Config {
 
 
 
-
-
-
 //[ 菜单栏 ]
 
     //左边菜单栏默认宽度 px
@@ -29,9 +26,6 @@ public class Config {
     //左边菜单栏与右边的分割线的宽度 px
     public static final int DIVIDER_SIZE = 2;
 
-    //左边菜单栏 显示用户信息板块 [宽度, 高度] px
-//    public static final int USER_INFO_BAR_WIDTH = 200;
-//    public static final int USER_INFO_BAR_HEIGHT = 50;
 
     //组件所在的包
     public static final String componentsPath = "stu_choose_teacher.choice.StuToTea.components.";
@@ -43,13 +37,6 @@ public class Config {
 //        MENU_BTNS.put("选择指导老师", componentsPath + "SelectAdviser");
     };
 
-    public static final int MENU_BTN_HEIGHT = 100;
-
-
-
-//[ dialog ]
-//    public static final int DIALOG_WIDRH = 400;
-//    public static final int DIALOG_HEIGHT = 300;
 
 
 }
