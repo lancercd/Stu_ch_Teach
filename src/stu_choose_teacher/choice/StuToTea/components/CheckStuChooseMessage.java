@@ -14,7 +14,7 @@ import java.util.Vector;
 public class CheckStuChooseMessage extends Box {
 
 
-    String[] title = {"教师学号", "教师姓名", "已选择学生姓名"};
+    String[] title = {"教师编号", "教师姓名", "指导教师确认", "指导教师要求", "通知内容", "我的自我介绍", "邮件通知", "短信通知"};
     String boxTitle = "查看我选择的老师";
 
 
@@ -28,8 +28,6 @@ public class CheckStuChooseMessage extends Box {
 
     Student user = null;
     public void setCurrentUser(Student user){
-        System.out.println("执行");
-        System.out.println(user);
         this.user = user;
     }
 
@@ -37,6 +35,7 @@ public class CheckStuChooseMessage extends Box {
         super(BoxLayout.Y_AXIS);
 
     }
+
 
     public void init(){
         table = new JTable(tableModel){
@@ -106,8 +105,8 @@ public class CheckStuChooseMessage extends Box {
         List<ChooseMessage> chooseMessages = stu.getChooseMessage(user.getStu_id());
         System.out.println(chooseMessages);
         for(ChooseMessage ele : chooseMessages){
-//            Vector<Object> row = ele.dataFormat();
-//            data.add(row);
+            Vector<Object> row = ele.dataFormat();
+            data.add(row);
         }
         return data;
 

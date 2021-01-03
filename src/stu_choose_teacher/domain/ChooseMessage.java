@@ -1,5 +1,9 @@
 package stu_choose_teacher.domain;
 
+import stu_choose_teacher.utils.FormData;
+
+import java.util.Vector;
+
 public class ChooseMessage {
     private GuideAdviser guideAdviser;
     private TutorStu tutorStu;
@@ -26,5 +30,18 @@ public class ChooseMessage {
                 "guideAdviser=" + guideAdviser +
                 ", tutorStu=" + tutorStu +
                 '}';
+    }
+
+    public Vector<Object> dataFormat(){
+        Vector<Object> data = new Vector<Object>();
+        data.add(guideAdviser.getTeacher_number());
+        data.add(guideAdviser.getTeacher_name());
+        data.add((guideAdviser.getGuide_adviser_affirm() == 1)? "已确认" : "未确认");
+        data.add(guideAdviser.getGuide_adviser_demand());
+        data.add(guideAdviser.getNotice_content());
+        data.add(tutorStu.getStu_self_introduce());
+        data.add(FormData.notice_message_to_string(tutorStu.getMessage_notice_guide_teacher()));
+        data.add(FormData.notice_message_to_string(tutorStu.getEmail_notice_read_teacher()));
+        return data;
     }
 }
