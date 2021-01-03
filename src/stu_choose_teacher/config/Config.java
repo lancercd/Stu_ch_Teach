@@ -30,7 +30,7 @@ public class Config {
 //    public static final int USER_INFO_BAR_HEIGHT = 50;
 
     //菜单按钮
-    public static final String[] MENU_BTNS = {"老师", "345", "567", "刘灿"};
+    public static final String[] MENU_BTNS = {"查看指导老师", "我的选择信息", "查看指导老师", "刘灿"};
 
     public static final int MENU_BTN_HEIGHT = 100;
 
