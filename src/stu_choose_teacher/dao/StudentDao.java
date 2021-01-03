@@ -69,9 +69,4 @@ public class StudentDao {
             return true;
         }
     }
-
-    public static void main(String[] args) {
-        boolean b = new StudentDao().checkStudentByGuide(1, 1);
-        System.out.println(b);
-    }
 }
