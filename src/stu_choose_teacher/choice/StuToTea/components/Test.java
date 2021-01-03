@@ -61,7 +61,6 @@ public class CheckTeaChStu extends Box {
         final DefaultTableModel dtm = new DefaultTableModel(vd,vh);
         final JTable table = new JTable(dtm);
         this.add( new JScrollPane(table) ); //要用JScrollPane包才会显示出表头
-        System.out.println(vd);
         setVisible(true);
     }
 
