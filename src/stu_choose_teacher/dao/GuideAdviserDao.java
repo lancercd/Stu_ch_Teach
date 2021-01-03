@@ -27,7 +27,7 @@ public class GuideAdviserDao {
                 "on tb_jk2_guide_adviser.semester_id = tb_jk2_semester.semester_id\n" +
                 "join tb_jk2_teacher\n" +
                 "on tb_jk2_teacher.teacher_id = tb_jk2_guide_adviser.stu_id\n" +
-                "where tb_jk2_semester.semester_id = ?;";
+                "where tb_jk2_semester.semester_id = ? and tb_jk2_guide_adviser.guide_adviser_affirm = 1;";
 
         List<GuideAdviser> guideAdvisers = template.query(sql,
                 new BeanPropertyRowMapper<GuideAdviser>(GuideAdviser.class),
