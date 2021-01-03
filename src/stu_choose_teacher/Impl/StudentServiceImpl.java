@@ -1,7 +1,9 @@
 package stu_choose_teacher.Impl;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import stu_choose_teacher.dao.GuideAdviserDao;
+import stu_choose_teacher.dao.SemesterDao;
 import stu_choose_teacher.dao.StudentDao;
 import stu_choose_teacher.dao.TutorStuDao;
 import stu_choose_teacher.domain.*;
@@ -18,7 +20,7 @@ public class StudentServiceImpl {
      * @param semester
      * @return
      */
-    public List<GuideAndStudent> getGuideAndStudents(Semester semester){
+    public List<GuideAndStudent> getGuideAndStudentsBySemester(Semester semester){
         // 根据 学期 得到所有指导老师
         GuideAdviserDao guideAdviserDao = new GuideAdviserDao();
         StudentDao studentDao = new StudentDao();
@@ -31,12 +33,30 @@ public class StudentServiceImpl {
         for(GuideAdviser guideAdviser : guideAdvisers){
             GuideAndStudent guideAndStudent = new GuideAndStudent();
             guideAndStudent.setGuideAdviser(guideAdviser);
+            guideAndStudent.setSemester(semester);
             List<Student> studentsByGuide = studentDao.getStudentsByGuide(guideAdviser.getGuide_adviser_id());
             guideAndStudent.setStudents(studentsByGuide);
             guideAndStudents.add(guideAndStudent);
         }
 
         return guideAndStudents;
+    }
+
+    /**
+     * 查询所有学期，指导教师信息以及已经选择学生的信息
+     * @return
+     */
+    public List<GuideAndStudent> getGuideAndStudents(){
+        List<Semester> semesters = new SemesterDao().getAllSemesters();
+        StudentServiceImpl studentService = new StudentServiceImpl();
+        List<GuideAndStudent> guideAndStudentList = new ArrayList<GuideAndStudent>();
+
+        for(Semester semester : semesters){
+            List<GuideAndStudent> guideAndStudentsBySemester = studentService.getGuideAndStudentsBySemester(semester);
+            guideAndStudentList.addAll(guideAndStudentsBySemester);
+        }
+
+        return guideAndStudentList;
     }
 
     /**
