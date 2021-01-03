@@ -24,4 +24,20 @@ public class StudentDao {
 
         return students;
     }
+
+    /**
+     * 根据学生id查找学生信息
+     * @param stu_id
+     * @return
+     */
+    public Student getStudent(int stu_id){
+        String sql = "select * from tb_jk2_student where stu_id = ?";
+
+        Student student = template.queryForObject(sql,
+                new BeanPropertyRowMapper<Student>(Student.class),
+                stu_id);
+
+        return student;
+    }
+
 }
