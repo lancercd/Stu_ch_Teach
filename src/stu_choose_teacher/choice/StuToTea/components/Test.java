@@ -4,6 +4,7 @@ package stu_choose_teacher.choice.StuToTea.components;
 import stu_choose_teacher.Impl.StudentServiceImpl;
 import stu_choose_teacher.domain.GuideAndStudent;
 import stu_choose_teacher.domain.Semester;
+import stu_choose_teacher.domain.Student;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -22,9 +23,18 @@ public class Test extends Box {
     private Vector<Vector<Object>> tableData;
     private TableModel tableModel;
 
+    Student user = null;
+    public void setCurrentUser(Student user){
+        this.user = user;
+    }
 
-    public Test() {
+    public Test( ) {
         super(BoxLayout.Y_AXIS);
+
+
+    }
+
+    public void init(){
         JPanel btnPanel = new JPanel();
         Color color = new Color(203, 220, 217);
         btnPanel.setBackground(color);
@@ -43,7 +53,6 @@ public class Test extends Box {
 
         this.add(btnPanel);
         test();
-
     }
 
     public void test() {

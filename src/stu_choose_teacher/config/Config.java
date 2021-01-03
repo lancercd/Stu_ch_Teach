@@ -16,9 +16,6 @@ public class Config {
     public static final int FRAME_INIT_HEIGHT = 900;
 
 
-    //user类所在位置
-    public static String USER_CLASS_NAME = "stu_choose_teacher.utils.User";
-
 
 
 

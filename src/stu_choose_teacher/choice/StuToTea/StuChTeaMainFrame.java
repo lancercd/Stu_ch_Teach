@@ -6,20 +6,26 @@ import stu_choose_teacher.choice.StuToTea.components.CheckAllAdviser;
 import stu_choose_teacher.choice.StuToTea.components.CheckStuChooseMessage;
 import stu_choose_teacher.choice.StuToTea.components.Index;
 import stu_choose_teacher.config.Config;
+import stu_choose_teacher.domain.Student;
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
 public class StuChTeaMainFrame extends JFrame {
     JSplitPane sp = null;
+    Student user = null;
 
     public StuChTeaMainFrame(){
         this.init();
+        this.user = new Student();
+        this.user.setStu_id(1);
     }
 
     /**
@@ -95,7 +101,7 @@ public class StuChTeaMainFrame extends JFrame {
 
 
         sp.setLeftComponent(createLeftBar());
-        sp.setRightComponent(new Index());
+        sp.setRightComponent(new Index(user));
         this.add(sp);
     }
 
@@ -107,8 +113,15 @@ public class StuChTeaMainFrame extends JFrame {
     private void createNewFrame(String flag){
         String componentsName = (String)Config.MENU_BTNS.get(flag);
         try {
-            Class ComponentClass = Class.forName(componentsName);
+            Class<?> ComponentClass = Class.forName(componentsName);
             Component component = (Component)ComponentClass.newInstance();
+
+            Method serUsermethod = ComponentClass.getMethod("setCurrentUser", Student.class);
+            Method initMethod = ComponentClass.getMethod("init");
+
+            serUsermethod.invoke(component, user);
+            initMethod.invoke(component);
+
             sp.setRightComponent(component);
             sp.setDividerLocation(Config.LEFT_BAR_WEIGHT);
         } catch (ClassNotFoundException e) {
@@ -118,6 +131,10 @@ public class StuChTeaMainFrame extends JFrame {
             System.out.println("实例化右侧组件失败");
         } catch (InstantiationException e) {
             System.out.println("实例化右侧组件失败 该组件不是Component");
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
         }
 
 

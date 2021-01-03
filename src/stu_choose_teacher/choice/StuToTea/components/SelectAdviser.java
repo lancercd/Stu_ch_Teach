@@ -4,6 +4,7 @@ package stu_choose_teacher.choice.StuToTea.components;
 import stu_choose_teacher.Impl.StudentServiceImpl;
 import stu_choose_teacher.domain.GuideAndStudent;
 import stu_choose_teacher.domain.Semester;
+import stu_choose_teacher.domain.Student;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -22,11 +23,18 @@ public class SelectAdviser extends Box {
     private Vector<Vector<Object>> tableData;
     private TableModel tableModel;
 
+    Student user = null;
+    public void setCurrentUser(Student user){
+        this.user = user;
+    }
 
-    public SelectAdviser() {
+    public SelectAdviser( ) {
         super(BoxLayout.Y_AXIS);
-        this.add(new JLabel("用户选择指导老师"));
 
+
+    }
+    public void init(){
+        this.add(new JLabel("用户选择指导老师"));
     }
 
     public void render() {

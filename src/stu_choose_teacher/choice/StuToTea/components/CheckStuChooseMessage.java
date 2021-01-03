@@ -1,24 +1,18 @@
 package stu_choose_teacher.choice.StuToTea.components;
 
 import stu_choose_teacher.Impl.StudentServiceImpl;
-import stu_choose_teacher.dao.SemesterDao;
 import stu_choose_teacher.domain.ChooseMessage;
-import stu_choose_teacher.domain.GuideAndStudent;
-import stu_choose_teacher.domain.Semester;
-import stu_choose_teacher.utils.UserUtil;
+import stu_choose_teacher.domain.Student;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.List;
 import java.util.Vector;
 
 public class CheckStuChooseMessage extends Box {
 
-    private int UserID = UserUtil.getUserId();
 
     String[] title = {"教师学号", "教师姓名", "已选择学生姓名"};
     String boxTitle = "查看我选择的老师";
@@ -32,9 +26,19 @@ public class CheckStuChooseMessage extends Box {
     private Vector<Vector<Object>> tableData;
     private TableModel tableModel;
 
+    Student user = null;
+    public void setCurrentUser(Student user){
+        System.out.println("执行");
+        System.out.println(user);
+        this.user = user;
+    }
 
-    public CheckStuChooseMessage() {
+    public CheckStuChooseMessage( ) {
         super(BoxLayout.Y_AXIS);
+
+    }
+
+    public void init(){
         table = new JTable(tableModel){
 
             @Override
@@ -99,8 +103,7 @@ public class CheckStuChooseMessage extends Box {
         Vector<Vector<Object>> data = new Vector<Vector<Object>>();
         StudentServiceImpl stu = new StudentServiceImpl();
 
-        List<ChooseMessage> chooseMessages = stu.getChooseMessage(UserID);
-        System.out.println("88888888888");
+        List<ChooseMessage> chooseMessages = stu.getChooseMessage(user.getStu_id());
         System.out.println(chooseMessages);
         for(ChooseMessage ele : chooseMessages){
 //            Vector<Object> row = ele.dataFormat();

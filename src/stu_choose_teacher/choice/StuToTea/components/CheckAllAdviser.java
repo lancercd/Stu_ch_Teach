@@ -4,6 +4,7 @@ import stu_choose_teacher.Impl.StudentServiceImpl;
 import stu_choose_teacher.dao.SemesterDao;
 import stu_choose_teacher.domain.GuideAndStudent;
 import stu_choose_teacher.domain.Semester;
+import stu_choose_teacher.domain.Student;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -28,9 +29,14 @@ public class CheckAllAdviser extends Box {
     private Vector<Vector<Object>> tableData;
     private TableModel tableModel;
 
+    Student user = null;
 
     public CheckAllAdviser() {
+
         super(BoxLayout.Y_AXIS);
+    }
+
+    public void init(){
         table = new JTable(tableModel){
 
             @Override
@@ -39,9 +45,11 @@ public class CheckAllAdviser extends Box {
             }
         };
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-
         initComponent();
+    }
+
+    public void setCurrentUser(Student user){
+        this.user = user;
     }
 
 
