@@ -1,6 +1,6 @@
 package stu_choose_teacher.Impl;
 
-import org.junit.jupiter.api.Test;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import stu_choose_teacher.dao.GuideAdviserDao;
 import stu_choose_teacher.dao.SemesterDao;

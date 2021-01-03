@@ -25,9 +25,6 @@ public class Semester {
 
     @Override
     public String toString() {
-        return "Semester{" +
-                "semester_id=" + semester_id +
-                ", semester_name='" + semester_name + '\'' +
-                '}';
+        return semester_name;
     }
 }

@@ -1,6 +1,7 @@
 package stu_choose_teacher.choice.StuToTea.components;
 
 import stu_choose_teacher.Impl.StudentServiceImpl;
+import stu_choose_teacher.dao.SemesterDao;
 import stu_choose_teacher.domain.GuideAndStudent;
 import stu_choose_teacher.domain.Semester;
 
@@ -86,8 +87,6 @@ public class Test extends Box {
         headerPanel.setLayout(new GridLayout(1, 2));
         JPanel leftPanel = new JPanel();
         JPanel rightPanel = new JPanel();
-        leftPanel.setBackground(Color.RED);
-        rightPanel.setBackground(Color.GREEN);
 
         //左边title 窗口标题
         JLabel title = new JLabel("查看所有老师");
@@ -112,6 +111,19 @@ public class Test extends Box {
         this.add( new JScrollPane(table) ); //要用JScrollPane包才会显示出表头
     }
 
+    public void setSemester(JComboBox ComboBox){
+        SemesterDao semesterDao = new SemesterDao();
+        List<Semester> semesters = semesterDao.getAllSemesters();
+        for(Semester se : semesters){
+            ComboBox.addItem(se);
+        }
+    }
+
+    public boolean validateSelectCount(){
+        if(select.getItemCount() == 0) return false;
+        return true;
+    }
+
 
     /**
      * 下拉列表框  显示所有学期
@@ -119,22 +131,14 @@ public class Test extends Box {
      */
     private JComboBox getSelection(){
         select = new JComboBox();
-        Semester semester1 = new Semester();
-        semester1.setSemester_id(1);
-        semester1.setSemester_name("第一学期");
-        Semester semester2 = new Semester();
-        semester2.setSemester_id(2);
-        semester2.setSemester_name("第二学期");
-        Semester semester3 = new Semester();
-        semester3.setSemester_id(3);
-        semester3.setSemester_name("第三学期");
-        select.addItem(semester1);
-        select.addItem(semester2);
-        select.addItem(semester3);
 
-        select.setSelectedIndex(0);
-        Semester semester = new Semester();
-        semester.setSemester_id(1);
+
+        setSemester(select);
+        if(validateSelectCount()){
+            select.setSelectedIndex(0);
+        }
+
+
 
         select.addItemListener(new ItemListener() {
             @Override
@@ -153,7 +157,7 @@ public class Test extends Box {
         Vector<Vector<Object>> data = new Vector<Vector<Object>>();
         StudentServiceImpl stu = new StudentServiceImpl();
 
-        List<GuideAndStudent> guideAndStudents = stu.getGuideAndStudents(semester);
+        List<GuideAndStudent> guideAndStudents = stu.getGuideAndStudentsBySemester(semester);
 
         for(GuideAndStudent ele : guideAndStudents){
             Vector<Object> row = ele.dataFormat();

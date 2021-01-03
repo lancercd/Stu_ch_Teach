@@ -70,7 +70,7 @@ public class CheckTeaChStu extends Box {
         StudentServiceImpl stu = new StudentServiceImpl();
         Semester semester = new Semester();
         semester.setSemester_id(1);
-        List<GuideAndStudent> guideAndStudents = stu.getGuideAndStudents(semester);
+        List<GuideAndStudent> guideAndStudents = stu.getGuideAndStudentsBySemester(semester);
 
         for(GuideAndStudent ele : guideAndStudents){
             Vector<Object> row = ele.dataFormat();
