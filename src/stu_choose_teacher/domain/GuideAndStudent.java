@@ -9,6 +9,7 @@ import java.util.Vector;
 public class GuideAndStudent {
     GuideAdviser guideAdviser;
     List<Student> students;
+    Semester semester;
 
     public GuideAdviser getGuideAdviser() {
         return guideAdviser;
@@ -26,14 +27,22 @@ public class GuideAndStudent {
         this.students = students;
     }
 
+    public Semester getSemester() {
+        return semester;
+    }
+
+    public void setSemester(Semester semester) {
+        this.semester = semester;
+    }
+
     @Override
     public String toString() {
         return "GuideAndStudent{" +
                 "guideAdviser=" + guideAdviser +
                 ", students=" + students +
+                ", semester=" + semester +
                 '}';
     }
-
 
     public Vector<Object> dataFormat(){
         Vector<Object> data = new Vector<Object>();
