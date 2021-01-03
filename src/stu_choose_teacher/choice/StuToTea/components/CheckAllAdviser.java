@@ -11,16 +11,13 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
 import java.util.List;
 import java.util.Vector;
 
 public class CheckAllAdviser extends Box {
 
-    String[] title = {"教师学号", "教师姓名", "已选择学生姓名"};
+    String[] title = {"id", "教师学号", "教师姓名", "已选择学生姓名"};
     String boxTitle = "查看所有老师";
     JComboBox select;
 
@@ -68,6 +65,47 @@ public class CheckAllAdviser extends Box {
 
         tableModel = new DefaultTableModel(tableData, vh);
         table.setModel(tableModel);
+
+
+        //表格点击事件
+        table.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int rowIndex = table.getSelectedRow();
+                    Vector<Object> row = tableData.get(rowIndex);
+
+                    int num = (int)row.get(0);
+                    onTableRowClick(num);
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
+    }
+
+    public void onTableRowClick(int teach_num){
+        System.out.println(teach_num);
+        new SelectTeaDialog(jf, false, "选择老师", teach_num).setVisible(true);
     }
 
     private Vector<String> getTableTitle(){
@@ -108,9 +146,7 @@ public class CheckAllAdviser extends Box {
         addBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("点击");
-                System.out.println(jf);
-                new SelectTeaDialog(jf, false, "选择老师").setVisible(true);
+//                new SelectTeaDialog(jf, false, "选择老师").setVisible(true);
             }
         });
 
