@@ -9,8 +9,10 @@ public class SelectTeaDialog extends JDialog {
 
     public SelectTeaDialog(JFrame jf, boolean isModel, String title){
         super(jf, title, isModel);
-        this.setSize(Config.DIALOG_WIDRH, Config.DIALOG_HEIGHT);
         this.setLocation(getLocationX(), getLocationY());
+        //宽度 400px  高度300px
+        this.setSize(400, 300);
+
 
         //组件
         Box vbox = Box.createVerticalBox();
