@@ -105,7 +105,7 @@ public class CheckAllAdviser extends Box {
 
     public void onTableRowClick(int teach_num){
         System.out.println(teach_num);
-        new SelectTeaDialog(jf, false, "选择老师", teach_num).setVisible(true);
+        new SelectTeaDialog(jf, false, "选择老师", teach_num, user.getStu_id()).setVisible(true);
     }
 
     private Vector<String> getTableTitle(){

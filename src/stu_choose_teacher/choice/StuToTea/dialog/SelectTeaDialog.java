@@ -1,34 +1,66 @@
 package stu_choose_teacher.choice.StuToTea.dialog;
 
 import stu_choose_teacher.config.Config;
+import stu_choose_teacher.dao.StudentDao;
 import stu_choose_teacher.domain.GuideAdviser;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class SelectTeaDialog extends JDialog {
-//    表id
-    int teachNum;
-//    信息
+    //   指导老师id
+    int guide_adviser_id;
+    //    用户id
+    int stu_id;
+    //    信息
     GuideAdviser data;
 
-    public SelectTeaDialog(JFrame jf, boolean isModel, String title, int teach_num){
+    JRadioButton email_radio;
+    JRadioButton message_radio;
+
+    public SelectTeaDialog(JFrame jf, boolean isModel, String title, int guide_adviser_id, int stu_id){
         super(jf, title, isModel);
-        this.teachNum = teach_num;
+        this.guide_adviser_id = guide_adviser_id;
+        this.stu_id = stu_id;
         this.setLocation(getLocationX(), getLocationY());
         //宽度 400px  高度300px
         this.setSize(400, 300);
 
         FormatDate();
-        initConponents();
+//        initNormalConponents();
+        validateHasSelected();
+
+    }
+    public void validateHasSelected(){
+        StudentDao stu = new StudentDao();
+//        initNormalConponents();
+
+        if(stu.checkStudentByGuide(guide_adviser_id, stu_id)){
+            System.out.println("if 内");
+            initNormalConponents();
+        }else{
+            System.out.println("if 外");
+            initNoticeComponents();
+        }
+    }
+
+    //该学生已经选了该老师了
+    private void initNoticeComponents(){
+        this.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        JLabel noticeLabel = new JLabel("您已经选择了该老师了");
+        noticeLabel.setFont(new Font("黑体", Font.BOLD, 20));
+
+        this.add(noticeLabel);
 
     }
 
 
     //渲染组件
-    private void initConponents(){
+    private void initNormalConponents(){
         //组件
         Box vbox = Box.createVerticalBox();
+
         Box nameBox = Box.createHorizontalBox();
         JLabel nameLabel = new JLabel("教师姓名:");
         JLabel nameText = new JLabel(data.getTeacher_name());
@@ -53,6 +85,40 @@ public class SelectTeaDialog extends JDialog {
 
 
 
+
+
+
+        //单选框
+        Box radioBox = Box.createHorizontalBox();
+        ButtonGroup group = new ButtonGroup();
+        email_radio = new JRadioButton("邮件通知", true);
+        message_radio = new JRadioButton("短信通知");
+        group.add(email_radio);
+        group.add(message_radio);
+
+        radioBox.add(email_radio);
+        radioBox.add(Box.createHorizontalStrut(20));
+        radioBox.add(message_radio);
+
+
+
+
+
+
+        //消息内容
+        Box noticeBox = Box.createHorizontalBox();
+        JLabel noticeLabel = new JLabel("介绍:");
+        JTextField noticeText = new JTextField(15);
+        noticeBox.add(noticeLabel);
+        noticeBox.add(Box.createHorizontalStrut(20));
+        noticeBox.add(noticeText);
+
+        //按钮
+        Box btnBox = Box.createHorizontalBox();
+        JButton btn = new JButton("确认");
+        btnBox.add(btn);
+
+
         //添加到vbox中
         //添加一个间隔
         vbox.add(Box.createHorizontalStrut(20));
@@ -64,7 +130,11 @@ public class SelectTeaDialog extends JDialog {
         vbox.add(demandBox);
 
 
+        vbox.add(radioBox);
+        vbox.add(noticeBox);
+        vbox.add(btnBox);
 
+        System.out.println("ok");
         //添加到该窗体中
         this.add(vbox);
     }
