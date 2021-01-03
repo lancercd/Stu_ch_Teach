@@ -39,8 +39,8 @@ public class Config {
     public static final Map<String, String> MENU_BTNS = new HashMap<String, String>();
     static{
         MENU_BTNS.put("查看/选择指导老师", componentsPath + "CheckAllAdviser");
-//        MENU_BTNS.put("我的选择信息", componentsPath + "CheckStuChooseMessage");
-        MENU_BTNS.put("选择指导老师", componentsPath + "SelectAdviser");
+        MENU_BTNS.put("我的选择信息", componentsPath + "CheckStuChooseMessage");
+//        MENU_BTNS.put("选择指导老师", componentsPath + "SelectAdviser");
     };
 
     public static final int MENU_BTN_HEIGHT = 100;

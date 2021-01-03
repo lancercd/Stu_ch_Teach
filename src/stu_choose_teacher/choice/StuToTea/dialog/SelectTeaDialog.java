@@ -1,11 +1,14 @@
 package stu_choose_teacher.choice.StuToTea.dialog;
 
+import stu_choose_teacher.Impl.StudentServiceImpl;
 import stu_choose_teacher.config.Config;
 import stu_choose_teacher.dao.StudentDao;
 import stu_choose_teacher.domain.GuideAdviser;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SelectTeaDialog extends JDialog {
     //   指导老师id
@@ -18,10 +21,13 @@ public class SelectTeaDialog extends JDialog {
     JRadioButton email_radio;
     JRadioButton message_radio;
 
+    JFrame jf;
+
     public SelectTeaDialog(JFrame jf, boolean isModel, String title, int guide_adviser_id, int stu_id){
         super(jf, title, isModel);
         this.guide_adviser_id = guide_adviser_id;
         this.stu_id = stu_id;
+        this.jf = jf;
         this.setLocation(getLocationX(), getLocationY());
         //宽度 400px  高度300px
         this.setSize(400, 300);
@@ -106,8 +112,16 @@ public class SelectTeaDialog extends JDialog {
 
 
         //消息内容
+        Box introBox = Box.createHorizontalBox();
+        JLabel introLabel = new JLabel("介绍:");
+        JTextField introText = new JTextField(15);
+        introBox.add(introLabel);
+        introBox.add(Box.createHorizontalStrut(20));
+        introBox.add(introText);
+
+        //消息内容
         Box noticeBox = Box.createHorizontalBox();
-        JLabel noticeLabel = new JLabel("介绍:");
+        JLabel noticeLabel = new JLabel("通知:");
         JTextField noticeText = new JTextField(15);
         noticeBox.add(noticeLabel);
         noticeBox.add(Box.createHorizontalStrut(20));
@@ -117,6 +131,22 @@ public class SelectTeaDialog extends JDialog {
         Box btnBox = Box.createHorizontalBox();
         JButton btn = new JButton("确认");
         btnBox.add(btn);
+        btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("点击了");
+                String notice = noticeText.getText().trim();
+                String intro = introText.getText().trim();
+                if(intro.isEmpty()){
+                    JOptionPane.showMessageDialog(jf, "请填写介绍信息!");
+                }
+                if(notice.isEmpty()){
+                    JOptionPane.showMessageDialog(jf, "请填写通知信息!");
+                }
+                submit(email_radio.isSelected(), intro, notice);
+                JOptionPane.showMessageDialog(jf, "添加成功!");
+            }
+        });
 
 
         //添加到vbox中
@@ -131,12 +161,20 @@ public class SelectTeaDialog extends JDialog {
 
 
         vbox.add(radioBox);
+        vbox.add(introBox);
         vbox.add(noticeBox);
         vbox.add(btnBox);
 
         System.out.println("ok");
         //添加到该窗体中
         this.add(vbox);
+    }
+
+
+    //提交选择信息
+    private void submit(boolean isEmail, String intro, String notice){
+        StudentServiceImpl studentService = new StudentServiceImpl();
+        studentService.chooseGuide(stu_id, guide_adviser_id, intro, isEmail? 1:0, isEmail? 0: 1, notice);
     }
 
 
