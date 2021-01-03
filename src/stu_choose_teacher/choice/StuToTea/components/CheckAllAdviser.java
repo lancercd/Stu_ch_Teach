@@ -17,6 +17,7 @@ import java.util.Vector;
 public class CheckAllAdviser extends Box {
 
     String[] title = {"教师学号", "教师姓名", "已选择学生姓名"};
+    String boxTitle = "查看所有老师";
     JComboBox select;
 
     final int WIDTH = 850;
@@ -50,7 +51,6 @@ public class CheckAllAdviser extends Box {
 
         //table body
         tableData = requestData(semester);
-        System.out.println(tableData);
 
         tableModel = new DefaultTableModel(tableData, vh);
         table.setModel(tableModel);
@@ -89,7 +89,7 @@ public class CheckAllAdviser extends Box {
         JPanel rightPanel = new JPanel();
 
         //左边title 窗口标题
-        JLabel title = new JLabel("查看所有老师");
+        JLabel title = new JLabel(boxTitle);
         title.setFont(new Font("黑体", Font.BOLD, 20));
         leftPanel.add(title);
 

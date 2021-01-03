@@ -12,7 +12,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.Vector;
 
-public class Test extends Box {
+public class SelectAdviser extends Box {
 
     final int WIDTH = 850;
     final int HEIGHT = 80;
@@ -23,30 +23,13 @@ public class Test extends Box {
     private TableModel tableModel;
 
 
-    public Test() {
+    public SelectAdviser() {
         super(BoxLayout.Y_AXIS);
-        JPanel btnPanel = new JPanel();
-        Color color = new Color(203, 220, 217);
-        btnPanel.setBackground(color);
-        btnPanel.setMaximumSize(new Dimension(WIDTH, HEIGHT));
-
-        btnPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-
-        JButton addBtn = new JButton("添加");
-        JButton upBtn = new JButton("修改");
-        JButton delBtn = new JButton("删除");
-
-
-        btnPanel.add(addBtn);
-        btnPanel.add(upBtn);
-        btnPanel.add(delBtn);
-
-        this.add(btnPanel);
-        test();
+        this.add(new JLabel("用户选择指导老师"));
 
     }
 
-    public void test() {
+    public void render() {
 
 
         Vector<String> vh = new Vector<String>();
@@ -61,6 +44,7 @@ public class Test extends Box {
         final DefaultTableModel dtm = new DefaultTableModel(vd,vh);
         final JTable table = new JTable(dtm);
         this.add( new JScrollPane(table) ); //要用JScrollPane包才会显示出表头
+        System.out.println(vd);
         setVisible(true);
     }
 
