@@ -1,5 +1,6 @@
 package stu_choose_teacher.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
@@ -46,11 +47,14 @@ public class GuideAndStudent {
 
     public Vector<Object> dataFormat(){
         Vector<Object> data = new Vector<Object>();
+        Vector<String> stuNames = new Vector<String>();
         data.add(guideAdviser.getTeacher_number());
         data.add(guideAdviser.getTeacher_name());
+
         for(Student stu : students){
-            data.add(stu.getStu_name());
+            stuNames.add(stu.getStu_name());
         }
+        data.add(String.join("," , stuNames));
         return data;
 
     }

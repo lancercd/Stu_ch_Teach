@@ -108,7 +108,7 @@ public class StuChTeaMainFrame extends JFrame {
 
     /**
      * 创建窗口组件到右边
-     * @param flag
+     * @param flag 窗体名
      */
     private void createNewFrame(String flag){
         String componentsName = (String)Config.MENU_BTNS.get(flag);
@@ -117,10 +117,10 @@ public class StuChTeaMainFrame extends JFrame {
             Component component = (Component)ComponentClass.newInstance();
 
             Method serUsermethod = ComponentClass.getMethod("setCurrentUser", Student.class);
-            Method initMethod = ComponentClass.getMethod("init");
+            Method initMethod = ComponentClass.getMethod("init", JFrame.class);
 
             serUsermethod.invoke(component, user);
-            initMethod.invoke(component);
+            initMethod.invoke(component, this);
 
             sp.setRightComponent(component);
             sp.setDividerLocation(Config.LEFT_BAR_WEIGHT);

@@ -47,6 +47,9 @@ public class Config {
 
 
 
+//[ dialog ]
+//    public static final int DIALOG_WIDRH = 400;
+//    public static final int DIALOG_HEIGHT = 300;
 
 
 }

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Vector;
 
 public class SelectAdviser extends Box {
+    JFrame jf = null;
 
     final int WIDTH = 850;
     final int HEIGHT = 80;
@@ -33,7 +34,8 @@ public class SelectAdviser extends Box {
 
 
     }
-    public void init(){
+    public void init(JFrame jf){
+        this.jf = jf;
         this.add(new JLabel("用户选择指导老师"));
     }
 

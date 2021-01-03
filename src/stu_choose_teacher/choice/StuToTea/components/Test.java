@@ -15,6 +15,8 @@ import java.util.Vector;
 
 public class Test extends Box {
 
+    JFrame jf = null;
+
     final int WIDTH = 850;
     final int HEIGHT = 80;
 
@@ -34,7 +36,8 @@ public class Test extends Box {
 
     }
 
-    public void init(){
+    public void init(JFrame jf){
+        this.jf = jf;
         JPanel btnPanel = new JPanel();
         Color color = new Color(203, 220, 217);
         btnPanel.setBackground(color);

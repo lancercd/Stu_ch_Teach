@@ -5,6 +5,7 @@ import stu_choose_teacher.domain.Student;
 import javax.swing.*;
 
 public class Index extends Box {
+    JFrame jf = null;
 
     Student user = null;
     public void setCurrentUser(Student user){
@@ -21,7 +22,8 @@ public class Index extends Box {
 
     }
 
-    public void init(){
+    public void init(JFrame jf){
+        this.jf = jf;
         this.add(new JLabel("首页"));
     }
 }

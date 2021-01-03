@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Vector;
 
 public class CheckStuChooseMessage extends Box {
-
+    JFrame jf = null;
 
     String[] title = {"教师编号", "教师姓名", "指导教师确认", "指导教师要求", "通知内容", "我的自我介绍", "邮件通知", "短信通知"};
     String boxTitle = "查看我选择的老师";
@@ -37,7 +37,8 @@ public class CheckStuChooseMessage extends Box {
     }
 
 
-    public void init(){
+    public void init(JFrame jf){
+        this.jf = jf;
         table = new JTable(tableModel){
 
             @Override
