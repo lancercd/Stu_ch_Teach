@@ -1,5 +1,10 @@
 package stu_choose_teacher.config;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 public class Config {
     //窗体title
     public static final String FRAME_TITLE = "学生选择老师";
@@ -11,6 +16,8 @@ public class Config {
     public static final int FRAME_INIT_HEIGHT = 900;
 
 
+    //user类所在位置
+    public static String USER_CLASS_NAME = "stu_choose_teacher.utils.User";
 
 
 
@@ -29,8 +36,15 @@ public class Config {
 //    public static final int USER_INFO_BAR_WIDTH = 200;
 //    public static final int USER_INFO_BAR_HEIGHT = 50;
 
+    //组件所在的包
+    public static final String componentsPath = "stu_choose_teacher.choice.StuToTea.components.";
     //菜单按钮
-    public static final String[] MENU_BTNS = {"查看指导老师", "我的选择信息", "查看指导老师", "刘灿"};
+    public static final Map<String, String> MENU_BTNS = new HashMap<String, String>();
+    static{
+        MENU_BTNS.put("查看指导老师", componentsPath + "CheckAllAdviser");
+        MENU_BTNS.put("我的选择信息", componentsPath + "CheckStuChooseMessage");
+        MENU_BTNS.put("选择指导老师", componentsPath + "SelectAdviser");
+    };
 
     public static final int MENU_BTN_HEIGHT = 100;
 

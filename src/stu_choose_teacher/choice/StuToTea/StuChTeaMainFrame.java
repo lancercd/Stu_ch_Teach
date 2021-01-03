@@ -3,6 +3,8 @@ package stu_choose_teacher.choice.StuToTea;
 
 
 import stu_choose_teacher.choice.StuToTea.components.CheckAllAdviser;
+import stu_choose_teacher.choice.StuToTea.components.CheckStuChooseMessage;
+import stu_choose_teacher.choice.StuToTea.components.Index;
 import stu_choose_teacher.config.Config;
 
 import javax.swing.*;
@@ -10,6 +12,8 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StuChTeaMainFrame extends JFrame {
     JSplitPane sp = null;
@@ -47,13 +51,21 @@ public class StuChTeaMainFrame extends JFrame {
         return null;
     }
 
+    private String[] getMenuBtnText(){
+        String[] btnsText = new String[Config.MENU_BTNS.size()];
+        int i=0;
+        for(String btn : Config.MENU_BTNS.keySet()){
+            btnsText[i++] = btn;
+        }
+        return btnsText;
+    }
 
     /**
      * 左边菜单栏内容
      * @return Component
      */
     private Component createLeftBar(){
-        String[] btnsText = Config.MENU_BTNS;
+        String[] btnsText = getMenuBtnText();
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("管理");
         for(String text : btnsText){
             DefaultMutableTreeNode node = new DefaultMutableTreeNode(text);
@@ -83,7 +95,7 @@ public class StuChTeaMainFrame extends JFrame {
 
 
         sp.setLeftComponent(createLeftBar());
-        sp.setRightComponent(new CheckAllAdviser());
+        sp.setRightComponent(new Index());
         this.add(sp);
     }
 
@@ -93,9 +105,21 @@ public class StuChTeaMainFrame extends JFrame {
      * @param flag
      */
     private void createNewFrame(String flag){
+        String componentsName = (String)Config.MENU_BTNS.get(flag);
+        try {
+            Class ComponentClass = Class.forName(componentsName);
+            Component component = (Component)ComponentClass.newInstance();
+            sp.setRightComponent(component);
+            sp.setDividerLocation(Config.LEFT_BAR_WEIGHT);
+        } catch (ClassNotFoundException e) {
 
+            System.out.println("配置信息错误 组件未找到");
+        } catch (IllegalAccessException e) {
+            System.out.println("实例化右侧组件失败");
+        } catch (InstantiationException e) {
+            System.out.println("实例化右侧组件失败 该组件不是Component");
+        }
 
-        sp.setRightComponent(new CheckAllAdviser());
 
     }
 
