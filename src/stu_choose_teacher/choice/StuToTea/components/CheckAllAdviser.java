@@ -14,7 +14,7 @@ import java.awt.event.ItemListener;
 import java.util.List;
 import java.util.Vector;
 
-public class Test extends Box {
+public class CheckAllAdviser extends Box {
 
     String[] title = {"教师学号", "教师姓名", "已选择学生姓名"};
     JComboBox select;
@@ -28,7 +28,7 @@ public class Test extends Box {
     private TableModel tableModel;
 
 
-    public Test() {
+    public CheckAllAdviser() {
         super(BoxLayout.Y_AXIS);
         table = new JTable(tableModel){
 
