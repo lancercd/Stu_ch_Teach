@@ -1,6 +1,7 @@
 package stu_choose_teacher.choice.StuToTea.components;
 
 import stu_choose_teacher.Impl.StudentServiceImpl;
+import stu_choose_teacher.choice.StuToTea.dialog.SelectTeaDialog;
 import stu_choose_teacher.domain.ChooseMessage;
 import stu_choose_teacher.domain.Student;
 import stu_choose_teacher.utils.TableUtil;
@@ -9,8 +10,13 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import java.util.List;
 import java.util.Vector;
 
@@ -66,6 +72,44 @@ public class CheckStuChooseMessage extends Box {
         tableModel = new DefaultTableModel(tableData, vh);
         table.setModel(tableModel);
         TableUtil.tableFace(table);
+
+        table.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int rowIndex = table.getSelectedRow();
+                    Vector<Object> row = tableData.get(rowIndex);
+
+                    int num = (int) row.get(0);
+                    onTableRowClick(num);
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+    }
+
+    public void onTableRowClick(int teach_num){
+        System.out.println(teach_num);
+        new SelectTeaDialog(jf, false, "选择老师", teach_num, user.getStu_id()).setVisible(true);
     }
 
     private Vector<String> getTableTitle(){
