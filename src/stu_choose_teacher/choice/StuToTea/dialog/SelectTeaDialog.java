@@ -29,29 +29,31 @@ public class SelectTeaDialog extends JDialog {
         this.stu_id = stu_id;
         this.jf = jf;
         this.setLocation(getLocationX() - 200, getLocationY() - 150);
-//        this.setLocation(100,100);
+
         //宽度 400px  高度300px
         this.setSize(400, 300);
 
         FormatDate();
-//        initNormalConponents();
-        validateHasSelected();
 
+        validateHasSelected();
     }
+
+    /**
+     * 判断用户是否已经选择了该老师
+     */
     public void validateHasSelected(){
         StudentDao stu = new StudentDao();
-//        initNormalConponents();
 
         if(stu.checkStudentByGuide(guide_adviser_id, stu_id)){
-            System.out.println("if 内");
             initNormalConponents();
         }else{
-            System.out.println("if 外");
             initNoticeComponents();
         }
     }
 
-    //该学生已经选了该老师了
+    /**
+     * 该学生已经选了该老师了
+     */
     private void initNoticeComponents(){
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -63,7 +65,9 @@ public class SelectTeaDialog extends JDialog {
     }
 
 
-    //渲染组件
+    /**
+     * 未选择该老师 渲染组件
+     */
     private void initNormalConponents(){
         //组件
         Box vbox = Box.createVerticalBox();
