@@ -6,6 +6,7 @@ import stu_choose_teacher.choice.StuToTea.dialog.SelectTeaDialog;
 import stu_choose_teacher.domain.ChooseMessage;
 import stu_choose_teacher.domain.Student;
 import stu_choose_teacher.domain.TutorStu;
+import stu_choose_teacher.utils.BtnFaceUtil;
 import stu_choose_teacher.utils.TableUtil;
 
 import javax.swing.*;
@@ -142,11 +143,12 @@ public class CheckStuChooseMessage extends Box {
 
         //右边  btns
         JPanel btnPanel = new JPanel();
-        btnPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        btnPanel.setLayout(new FlowLayout(FlowLayout.RIGHT)); 
 
         JButton delBtn = new JButton("删除");
+        BtnFaceUtil.btnFace(delBtn, new Color(251, 96, 80), new Color(255, 255, 255));
         JButton modifyBtn = new JButton("修改");
-
+        BtnFaceUtil.btnFace(modifyBtn, new Color(230, 126, 34), new Color(255, 255, 255));
         delBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -105,7 +105,6 @@ public class CheckAllAdviser extends Box {
     }
 
     public void onTableRowClick(int teach_num){
-        System.out.println(teach_num);
         new SelectTeaDialog(jf, false, "选择老师", teach_num, user.getStu_id()).setVisible(true);
     }
 
@@ -115,6 +114,19 @@ public class CheckAllAdviser extends Box {
             vh.add(h);
         }
         return vh;
+    }
+
+
+    /**
+     * 判断表格单元有没有被选中
+     * @return boolean
+     */
+    private boolean tableIsSelected(){
+        if(table.getSelectedColumn() == -1){
+            JOptionPane.showMessageDialog(jf, "请选中表格的数据!");
+            return false;
+        }
+        return true;
     }
 
 
@@ -147,7 +159,11 @@ public class CheckAllAdviser extends Box {
         addBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                new SelectTeaDialog(jf, false, "选择老师").setVisible(true);
+                if(!tableIsSelected()) return;
+                int rowIndex = table.getSelectedRow();
+                Vector<Object> row = tableData.get(rowIndex);
+                int num = (int)row.get(0);
+                onTableRowClick(num);
             }
         });
 
