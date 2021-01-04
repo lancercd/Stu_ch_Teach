@@ -1,7 +1,6 @@
 package stu_choose_teacher.choice.StuToTea.dialog;
 
 import stu_choose_teacher.Impl.StudentServiceImpl;
-import stu_choose_teacher.config.Config;
 import stu_choose_teacher.dao.StudentDao;
 import stu_choose_teacher.domain.GuideAdviser;
 
@@ -10,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SelectTeaDialog extends JDialog {
+public class ModifySelectTeaDialog extends JDialog {
     //   指导老师id
     int id;
     //    用户id
@@ -23,7 +22,7 @@ public class SelectTeaDialog extends JDialog {
 
     JFrame jf;
 
-    public SelectTeaDialog(JFrame jf, boolean isModel, String title, int id, int stu_id){
+    public ModifySelectTeaDialog(JFrame jf, boolean isModel, String title, int id, int stu_id){
         super(jf, title, isModel);
         this.id = id;
         this.stu_id = stu_id;
@@ -43,13 +42,14 @@ public class SelectTeaDialog extends JDialog {
      */
     public void validateHasSelected(){
         StudentDao stu = new StudentDao();
+        initNormalConponents();
 
-        if(stu.checkStudentByGuide(id, stu_id)){
-            initNoticeComponents();
-        }else{
-
-            initNormalConponents();
-        }
+//        if(stu.checkStudentByGuide(id, stu_id)){
+//            initNoticeComponents();
+//        }else{
+//
+//            initNormalConponents();
+//        }
     }
 
     /**
@@ -74,30 +74,6 @@ public class SelectTeaDialog extends JDialog {
         Box vbox = Box.createVerticalBox();
 
         Box nameBox = Box.createHorizontalBox();
-        JLabel nameLabel = new JLabel("教师姓名:");
-        JLabel nameText = new JLabel(data.getTeacher_name());
-        nameBox.add(nameLabel);
-        nameBox.add(Box.createHorizontalStrut(20));
-        nameBox.add(nameText);
-
-
-        Box numBox = Box.createHorizontalBox();
-        JLabel numLabel = new JLabel("教师工号:");
-        JLabel numText = new JLabel(String.valueOf(data.getTeacher_number()));
-        numBox.add(numLabel);
-        numBox.add(Box.createHorizontalStrut(20));
-        numBox.add(numText);
-
-        Box demandBox = Box.createHorizontalBox();
-        JLabel demandLabel = new JLabel("要求:");
-        JLabel demandText = new JLabel(data.getGuide_adviser_demand());
-        demandBox.add(demandLabel);
-        demandBox.add(Box.createHorizontalStrut(20));
-        demandBox.add(demandText);
-
-
-
-
 
 
         //单选框
@@ -161,11 +137,9 @@ public class SelectTeaDialog extends JDialog {
         //添加一个间隔
         vbox.add(Box.createHorizontalStrut(20));
         vbox.add(nameBox);
-        //添加一个间隔
+
         vbox.add(Box.createHorizontalStrut(15));
-        vbox.add(numBox);
-        vbox.add(Box.createHorizontalStrut(15));
-        vbox.add(demandBox);
+
 
 
         vbox.add(radioBox);
@@ -190,7 +164,7 @@ public class SelectTeaDialog extends JDialog {
         GuideAdviser data = new GuideAdviser();
         data.setTeacher_name("lc");
         data.setTeacher_number(456789);
-        data.setGuide_adviser_demand("要求各种个样子那个的撒发达发");
+        data.setGuide_adviser_demand("要求");
 
         this.data = data;
 

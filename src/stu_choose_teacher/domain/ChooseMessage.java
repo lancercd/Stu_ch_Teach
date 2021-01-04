@@ -39,10 +39,11 @@ public class ChooseMessage {
         data.add(guideAdviser.getTeacher_name());
         data.add((guideAdviser.getGuide_adviser_affirm() == 1)? "已确认" : "未确认");
         data.add(guideAdviser.getGuide_adviser_demand());
+        data.add(FormData.check_notice_type(tutorStu.getMessage_notice_guide_teacher(), tutorStu.getEmail_notice_read_teacher()));
         data.add(guideAdviser.getNotice_content());
         data.add(tutorStu.getStu_self_introduce());
-        data.add(FormData.notice_message_to_string(tutorStu.getMessage_notice_guide_teacher()));
-        data.add(FormData.notice_message_to_string(tutorStu.getEmail_notice_read_teacher()));
+        data.add(FormData.notice_message_to_string(tutorStu.getMessage_notice_stu()));
+        data.add(FormData.notice_message_to_string(tutorStu.getEmail_notice_stu()));
         return data;
     }
 }

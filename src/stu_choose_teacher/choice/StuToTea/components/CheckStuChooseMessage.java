@@ -1,9 +1,11 @@
 package stu_choose_teacher.choice.StuToTea.components;
 
 import stu_choose_teacher.Impl.StudentServiceImpl;
+import stu_choose_teacher.choice.StuToTea.dialog.ModifySelectTeaDialog;
 import stu_choose_teacher.choice.StuToTea.dialog.SelectTeaDialog;
 import stu_choose_teacher.domain.ChooseMessage;
 import stu_choose_teacher.domain.Student;
+import stu_choose_teacher.domain.TutorStu;
 import stu_choose_teacher.utils.TableUtil;
 
 import javax.swing.*;
@@ -23,7 +25,7 @@ import java.util.Vector;
 public class CheckStuChooseMessage extends Box {
     JFrame jf = null;
 
-    String[] title = {"id", "教师编号", "教师姓名", "指导教师确认", "指导教师要求", "通知内容", "我的自我介绍", "邮件通知", "短信通知"};
+    String[] title = {"id", "教师编号", "教师姓名", "指导教师确认", "指导教师要求", "通知类型", "通知内容", "自我介绍", "邮件审核", "短信审核"};
     String boxTitle = "查看我选择的老师";
 
 
@@ -143,7 +145,7 @@ public class CheckStuChooseMessage extends Box {
         btnPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
         JButton delBtn = new JButton("删除");
-
+        JButton modifyBtn = new JButton("修改");
 
         delBtn.addActionListener(new ActionListener() {
             @Override
@@ -151,8 +153,15 @@ public class CheckStuChooseMessage extends Box {
                 delBtnClick();
             }
         });
+        modifyBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                modifyBtnClick();
+            }
+        });
 
         btnPanel.add(delBtn);
+        btnPanel.add(modifyBtn);
 
 
 
@@ -169,15 +178,24 @@ public class CheckStuChooseMessage extends Box {
         this.add( new JScrollPane(table) ); //要用JScrollPane包才会显示出表头
     }
 
+    /**
+     * 判断表格单元有没有被选中
+     * @return boolean
+     */
+    private boolean tableIsSelected(){
+        if(table.getSelectedColumn() == -1){
+            JOptionPane.showMessageDialog(jf, "请选中表格的数据!");
+            return false;
+        }
+        return true;
+    }
+
 
     /**
      * 点击删除按钮 调用此函数
      */
     public void delBtnClick(){
-        if(table.getSelectedColumn() == -1){
-            JOptionPane.showMessageDialog(jf, "请选中表格的数据!");
-            return;
-        }
+        if(!tableIsSelected()) return;
         int id = (int)tableData.get(table.getSelectedRow()).get(0);
         StudentServiceImpl studentService = new StudentServiceImpl();
         studentService.deleteTutorStu(id);
@@ -186,6 +204,37 @@ public class CheckStuChooseMessage extends Box {
     }
 
 
+    /**
+     * 点击修改按钮  调用此函数
+     */
+    public void modifyBtnClick(){
+        if(!tableIsSelected()) return;
+        int id = (int)tableData.get(table.getSelectedRow()).get(0);
+        String adviser_check = (String)tableData.get(table.getSelectedRow()).get(3);
+        String message = (String)tableData.get(table.getSelectedRow()).get(6);
+        String intro = (String)tableData.get(table.getSelectedRow()).get(7);
+        String message_check = (String)tableData.get(table.getSelectedRow()).get(8);
+        String email_check = (String)tableData.get(table.getSelectedRow()).get(9);
+
+        if(adviser_check.equals("已确认")){
+            JOptionPane.showMessageDialog(jf, "导师已确认无法修改!");
+            return;
+        }
+        if(!message_check.equals("未审核") || !email_check.equals("未审核")){
+            JOptionPane.showMessageDialog(jf, "已被审核无法修改!");
+            return;
+        }
+
+
+        TutorStu tutorStu = new TutorStu();
+
+        new ModifySelectTeaDialog(jf, true, "修改信息", id, user.getStu_id()).setVisible(true);
+
+//        StudentServiceImpl studentService = new StudentServiceImpl();
+//        studentService.deleteTutorStu(id);
+//        initTable();
+//        JOptionPane.showMessageDialog(jf, "删除成功!");
+    }
 
 
 

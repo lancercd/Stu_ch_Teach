@@ -6,4 +6,28 @@ public class FormData {
         String status[] = {"未审核", "审核通过", "不同意"};
         return status[flag];
     }
+
+//    public static String notice_string_to_int(String flag){
+        //not validate
+//        String status[] = {"未审核", "审核通过", "不同意"};
+//        return status[flag];
+//    }
+
+
+    public static String check_notice_type(int message, int email){
+        if(message == 0 && email == 0){
+            return "不需要通知";
+        }else if(message == 1){
+            return "邮件通知";
+        }else if(email == 1){
+            return "短信通知";
+        }else if(message == 2){
+            return "邮件已通知";
+        }else if(email == 2){
+            return "短信已通知";
+        }
+
+
+        return "未知状态";
+    }
 }
