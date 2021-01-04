@@ -60,7 +60,6 @@ public class CheckStuChooseMessage extends Box {
 
         //table body
         tableData = requestData();
-        System.out.println(tableData);
 
         tableModel = new DefaultTableModel(tableData, vh);
         table.setModel(tableModel);
@@ -106,7 +105,6 @@ public class CheckStuChooseMessage extends Box {
         StudentServiceImpl stu = new StudentServiceImpl();
 
         List<ChooseMessage> chooseMessages = stu.getChooseMessage(user.getStu_id());
-        System.out.println(chooseMessages);
         for(ChooseMessage ele : chooseMessages){
             Vector<Object> row = ele.dataFormat();
             data.add(row);

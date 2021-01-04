@@ -28,7 +28,8 @@ public class SelectTeaDialog extends JDialog {
         this.guide_adviser_id = guide_adviser_id;
         this.stu_id = stu_id;
         this.jf = jf;
-        this.setLocation(getLocationX(), getLocationY());
+        this.setLocation(getLocationX() - 200, getLocationY() - 150);
+//        this.setLocation(100,100);
         //宽度 400px  高度300px
         this.setSize(400, 300);
 
