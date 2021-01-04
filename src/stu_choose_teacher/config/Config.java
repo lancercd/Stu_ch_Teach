@@ -1,9 +1,6 @@
 package stu_choose_teacher.config;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Config {
     //窗体title
@@ -30,10 +27,12 @@ public class Config {
     //组件所在的包
     public static final String componentsPath = "stu_choose_teacher.choice.StuToTea.components.";
     //菜单按钮
-    public static final Map<String, String> MENU_BTNS = new HashMap<String, String>();
+    public static final Map<String, String> MENU_BTNS = new LinkedHashMap<String, String>();
     static{
+        MENU_BTNS.put("首页", componentsPath + "Index");
         MENU_BTNS.put("查看/选择指导老师", componentsPath + "CheckAllAdviser");
         MENU_BTNS.put("我的选择信息", componentsPath + "CheckStuChooseMessage");
+
     };
 
 

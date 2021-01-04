@@ -2,12 +2,14 @@ package stu_choose_teacher.choice.StuToTea;
 
 
 
+import com.sun.javafx.scene.shape.PathUtils;
 import stu_choose_teacher.choice.StuToTea.components.CheckAllAdviser;
 import stu_choose_teacher.choice.StuToTea.components.CheckStuChooseMessage;
 import stu_choose_teacher.choice.StuToTea.components.Index;
 import stu_choose_teacher.config.Config;
 import stu_choose_teacher.domain.Student;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -77,6 +79,9 @@ public class StuChTeaMainFrame extends JFrame {
      * @return Component
      */
     private Component createLeftBar(){
+        JPanel jPanel = new JPanel();
+        Color base = new Color(52, 152, 219,50);
+        jPanel.setBackground(base);
         String[] btnsText = getMenuBtnText();
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("管理");
         for(String text : btnsText){
@@ -93,7 +98,9 @@ public class StuChTeaMainFrame extends JFrame {
                 createNewFrame(lastPathComponent.toString());
             }
         });
-        return tree;
+        tree.setBackground(base);
+        jPanel.add(tree);
+        return jPanel;
     }
 
     private void conponentsInit(){
@@ -104,14 +111,14 @@ public class StuChTeaMainFrame extends JFrame {
         sp.setDividerLocation(Config.LEFT_BAR_WEIGHT);
         sp.setDividerSize(Config.DIVIDER_SIZE);
 
-        JPanel rightBar = new JPanel();
+//        JPanel rightBar = new JPanel();
 
-
+//        sp.setBackground(new Color(52, 152, 219, 50));
         sp.setLeftComponent(createLeftBar());
-        CheckAllAdviser allAdviser = new CheckAllAdviser();
-        allAdviser.setCurrentUser(user);
-        allAdviser.init(this);
-        sp.setRightComponent(allAdviser);
+//        CheckAllAdviser allAdviser = new CheckAllAdviser();
+//        allAdviser.setCurrentUser(user);
+//        allAdviser.init(this);
+        sp.setRightComponent(new Index(user));
 
         this.add(sp);
     }
@@ -123,6 +130,7 @@ public class StuChTeaMainFrame extends JFrame {
      */
     private void createNewFrame(String flag){
         String componentsName = (String)Config.MENU_BTNS.get(flag);
+        if(componentsName == null) return;
         try {
             Class<?> ComponentClass = Class.forName(componentsName);
             Component component = (Component)ComponentClass.newInstance();
@@ -173,13 +181,16 @@ public class StuChTeaMainFrame extends JFrame {
     private class MenuBtnRenderer extends DefaultTreeCellRenderer {
         private Image rootIcon = null;
 
-//        public MenuBtnRenderer(){
-//            rootIcon = ImageIO.read();
-//        }
+        public MenuBtnRenderer(){
+
+//            rootIcon = ImageIO.read("");
+        }
 
         @Override
         public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
             return super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
+
+//            this.setIcon(new ImageIcon("\\src\\stu_choose_teacher\\static\\index.png"));
         }
     }
 }

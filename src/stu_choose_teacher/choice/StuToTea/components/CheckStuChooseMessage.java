@@ -134,7 +134,7 @@ public class CheckStuChooseMessage extends Box {
 
         //左边title 窗口标题
         JLabel title = new JLabel(boxTitle);
-        title.setFont(new Font("黑体", Font.BOLD, 20));
+        title.setFont(new Font("黑体", Font.BOLD, 30));
         leftPanel.add(title);
 
 
@@ -148,7 +148,7 @@ public class CheckStuChooseMessage extends Box {
         JButton delBtn = new JButton("删除");
         BtnFaceUtil.btnFace(delBtn, new Color(251, 96, 80), new Color(255, 255, 255));
         JButton modifyBtn = new JButton("修改");
-        BtnFaceUtil.btnFace(modifyBtn, new Color(230, 126, 34), new Color(255, 255, 255));
+        BtnFaceUtil.btnFace(modifyBtn, new Color(243, 156, 18), new Color(255, 255, 255));
         delBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -198,6 +198,17 @@ public class CheckStuChooseMessage extends Box {
      */
     public void delBtnClick(){
         if(!tableIsSelected()) return;
+
+
+        String check_status = (String)tableData.get(table.getSelectedRow()).get(4);
+
+        if(!check_status.equals("待审核")){
+            JOptionPane.showMessageDialog(jf, "已确认无法修改!");
+            return;
+        }
+
+
+
         int id = (int)tableData.get(table.getSelectedRow()).get(0);
         StudentServiceImpl studentService = new StudentServiceImpl();
         studentService.deleteTutorStu(id);

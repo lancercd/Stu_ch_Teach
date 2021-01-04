@@ -6,6 +6,7 @@ import stu_choose_teacher.dao.SemesterDao;
 import stu_choose_teacher.domain.GuideAndStudent;
 import stu_choose_teacher.domain.Semester;
 import stu_choose_teacher.domain.Student;
+import stu_choose_teacher.utils.BtnFaceUtil;
 import stu_choose_teacher.utils.TableUtil;
 
 import javax.swing.*;
@@ -141,11 +142,13 @@ public class CheckAllAdviser extends Box {
         //左边title 窗口标题
         JLabel title = new JLabel(boxTitle);
         title.setFont(new Font("黑体", Font.BOLD, 20));
+        title.setFont(new Font("黑体", Font.BOLD, 30));
         leftPanel.add(title);
 
 
         //中间选择学期部分
         JLabel label = new JLabel("选择学期");
+        label.setFont(new Font("楷体", Font.BOLD, 25));
         select = getSelection();
 
         //右边  btns
@@ -153,8 +156,7 @@ public class CheckAllAdviser extends Box {
         btnPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
         JButton addBtn = new JButton("选择导师");
-//        JButton upBtn = new JButton("修改");
-//        JButton delBtn = new JButton("删除");
+        BtnFaceUtil.btnFace(addBtn, new Color(39, 174, 96), new Color(255,255,255));
 
         addBtn.addActionListener(new ActionListener() {
             @Override
@@ -168,8 +170,6 @@ public class CheckAllAdviser extends Box {
         });
 
         btnPanel.add(addBtn);
-//        btnPanel.add(upBtn);
-//        btnPanel.add(delBtn);
 
 
         //添加到容器中

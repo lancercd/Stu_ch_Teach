@@ -30,4 +30,12 @@ public class FormData {
 
         return "未知状态";
     }
+
+
+
+    public static String check_tea_validate_status(int flag){
+        if(flag < 0 || flag > 2) return "unknow";
+        String[] status = {"待审核", "已确认", "不同意"};
+        return status[flag];
+    }
 }
