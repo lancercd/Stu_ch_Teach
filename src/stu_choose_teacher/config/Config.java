@@ -7,10 +7,10 @@ public class Config {
     public static final String FRAME_TITLE = "学生选择老师";
 
     //窗体默认宽度 px
-    public static final int FRAME_INIT_WEIGHT = 1500;
+    public static final int FRAME_INIT_WEIGHT = 1500;   // 1500
 
     //窗体默认高度 px
-    public static final int FRAME_INIT_HEIGHT = 900;
+    public static final int FRAME_INIT_HEIGHT = 900;    // 900
 
 
 
