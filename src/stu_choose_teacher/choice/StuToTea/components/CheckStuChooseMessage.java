@@ -9,6 +9,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
 
@@ -54,7 +56,7 @@ public class CheckStuChooseMessage extends Box {
     }
 
 
-    public void initTable(){
+    private void initTable(){
         //table title
         Vector<String> vh = getTableTitle();
 
@@ -75,18 +77,47 @@ public class CheckStuChooseMessage extends Box {
     }
 
 
-    public void initComponent(){
+    private void initComponent(){
 
         JPanel headerPanel = new JPanel();
         headerPanel.setMaximumSize(new Dimension(850, 200));
-
+        headerPanel.setLayout(new GridLayout(1, 3));
+        JPanel leftPanel = new JPanel();
+        JPanel rightPanel = new JPanel();
 
         //左边title 窗口标题
         JLabel title = new JLabel(boxTitle);
         title.setFont(new Font("黑体", Font.BOLD, 20));
+        leftPanel.add(title);
 
 
-        headerPanel.add(title);
+        //中间选择学期部分
+        JLabel label = new JLabel();
+
+        //右边  btns
+        JPanel btnPanel = new JPanel();
+        btnPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+        JButton delBtn = new JButton("删除");
+
+
+        delBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                delBtnClick();
+            }
+        });
+
+        btnPanel.add(delBtn);
+
+
+
+        //添加到容器中
+        rightPanel.add(label);
+        rightPanel.add(label);
+        headerPanel.add(leftPanel);
+        headerPanel.add(rightPanel);
+        headerPanel.add(btnPanel);
         this.add(headerPanel);
 
 
@@ -95,12 +126,20 @@ public class CheckStuChooseMessage extends Box {
     }
 
 
+    /**
+     * 点击删除按钮 调用此函数
+     */
+    public void delBtnClick(){
+
+    }
 
 
 
 
 
-    public Vector<Vector<Object>> requestData(){
+
+
+    private Vector<Vector<Object>> requestData(){
         Vector<Vector<Object>> data = new Vector<Vector<Object>>();
         StudentServiceImpl stu = new StudentServiceImpl();
 

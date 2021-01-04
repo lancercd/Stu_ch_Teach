@@ -144,9 +144,11 @@ public class SelectTeaDialog extends JDialog {
                 String intro = introText.getText().trim();
                 if(intro.isEmpty()){
                     JOptionPane.showMessageDialog(jf, "请填写介绍信息!");
+                    return;
                 }
                 if(notice.isEmpty()){
                     JOptionPane.showMessageDialog(jf, "请填写通知信息!");
+                    return;
                 }
                 submit(email_radio.isSelected(), intro, notice);
                 JOptionPane.showMessageDialog(jf, "添加成功!");
