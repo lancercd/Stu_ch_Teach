@@ -69,7 +69,6 @@ public class CheckAllAdviser extends Box {
         TableUtil.tableFace(table);
 
 
-
         //表格点击事件
         table.addMouseListener(new MouseListener() {
             @Override
@@ -77,7 +76,6 @@ public class CheckAllAdviser extends Box {
                 if (e.getClickCount() == 2) {
                     int rowIndex = table.getSelectedRow();
                     Vector<Object> row = tableData.get(rowIndex);
-
                     int num = (int)row.get(0);
                     onTableRowClick(num);
                 }
@@ -224,7 +222,6 @@ public class CheckAllAdviser extends Box {
             data.add(row);
         }
         return data;
-
     }
 
 }
