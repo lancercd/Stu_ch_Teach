@@ -23,6 +23,10 @@ public class StuChTeaMainFrame extends JFrame {
     JSplitPane sp = null;
     Student user = null;
 
+
+    /**
+     * 当前用户
+     */
     public StuChTeaMainFrame(){
         this.init();
         this.user = new Student();
@@ -79,6 +83,7 @@ public class StuChTeaMainFrame extends JFrame {
             root.add(node);
         }
         JTree tree = new JTree(root);
+        tree.setFont(new Font("宋体", Font.PLAIN, 24));
         tree.addTreeSelectionListener(new TreeSelectionListener() {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
@@ -102,7 +107,11 @@ public class StuChTeaMainFrame extends JFrame {
 
 
         sp.setLeftComponent(createLeftBar());
-        sp.setRightComponent(new Index(user));
+        CheckAllAdviser allAdviser = new CheckAllAdviser();
+        allAdviser.setCurrentUser(user);
+        allAdviser.init(this);
+        sp.setRightComponent(allAdviser);
+
         this.add(sp);
     }
 
