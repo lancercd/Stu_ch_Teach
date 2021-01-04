@@ -28,9 +28,10 @@ public class StuChTeaMainFrame extends JFrame {
      * 当前用户
      */
     public StuChTeaMainFrame(){
-        this.init();
         this.user = new Student();
         this.user.setStu_id(1);
+        this.init();
+
     }
 
     /**
