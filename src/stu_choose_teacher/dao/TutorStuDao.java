@@ -68,6 +68,24 @@ public class TutorStuDao {
                 tutorStu.getNotice_read_teacher_content(),tutor_stu_id);
     }
 
+    public TutorStu getTutorStu(int tutor_stu_id, int guide_adviser_id, int stu_id, String stu_self_introduce,
+                                int email_notice_guide_teacher, int message_notice_guide_teacher,
+                                String notice_guide_teacher_content, int guide_teacher_check){
+        TutorStu tutorStu = new TutorStu();
+
+        tutorStu.setTutor_stu_id(tutor_stu_id);
+        tutorStu.setGuide_adviser_id(guide_adviser_id);
+        tutorStu.setStu_id(stu_id);
+        tutorStu.setStu_self_introduce(stu_self_introduce);
+        tutorStu.setEmail_notice_guide_teacher(email_notice_guide_teacher);
+        tutorStu.setMessage_notice_guide_teacher(message_notice_guide_teacher);
+        tutorStu.setNotice_guide_teacher_content(notice_guide_teacher_content);
+        tutorStu.setGuide_teacher_check(guide_teacher_check);
+        tutorStu.setRead_teacher_id(-1);
+
+        return tutorStu;
+    }
+
     /**
      * 删除表tutorStu记录，根据表id
      * @param tutor_stu_id
