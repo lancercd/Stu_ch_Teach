@@ -45,9 +45,10 @@ public class SelectTeaDialog extends JDialog {
         StudentDao stu = new StudentDao();
 
         if(stu.checkStudentByGuide(guide_adviser_id, stu_id)){
-            initNormalConponents();
-        }else{
             initNoticeComponents();
+        }else{
+
+            initNormalConponents();
         }
     }
 

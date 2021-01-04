@@ -34,6 +34,7 @@ public class ChooseMessage {
 
     public Vector<Object> dataFormat(){
         Vector<Object> data = new Vector<Object>();
+        data.add(tutorStu.getTutor_stu_id());
         data.add(guideAdviser.getTeacher_number());
         data.add(guideAdviser.getTeacher_name());
         data.add((guideAdviser.getGuide_adviser_affirm() == 1)? "已确认" : "未确认");

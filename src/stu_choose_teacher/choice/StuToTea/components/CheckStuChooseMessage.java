@@ -23,7 +23,7 @@ import java.util.Vector;
 public class CheckStuChooseMessage extends Box {
     JFrame jf = null;
 
-    String[] title = {"教师编号", "教师姓名", "指导教师确认", "指导教师要求", "通知内容", "我的自我介绍", "邮件通知", "短信通知"};
+    String[] title = {"id", "教师编号", "教师姓名", "指导教师确认", "指导教师要求", "通知内容", "我的自我介绍", "邮件通知", "短信通知"};
     String boxTitle = "查看我选择的老师";
 
 
@@ -81,7 +81,7 @@ public class CheckStuChooseMessage extends Box {
                     Vector<Object> row = tableData.get(rowIndex);
 
                     int num = (int) row.get(0);
-                    onTableRowClick(num);
+//                    onTableRowClick(num);
                 }
             }
 
@@ -107,10 +107,10 @@ public class CheckStuChooseMessage extends Box {
         });
     }
 
-    public void onTableRowClick(int teach_num){
-        System.out.println(teach_num);
-        new SelectTeaDialog(jf, false, "选择老师", teach_num, user.getStu_id()).setVisible(true);
-    }
+//    public void onTableRowClick(int teach_num){
+//        System.out.println(teach_num);
+//        new SelectTeaDialog(jf, false, "选择老师", teach_num, user.getStu_id()).setVisible(true);
+//    }
 
     private Vector<String> getTableTitle(){
         Vector<String> vh = new Vector<String>();
@@ -174,7 +174,15 @@ public class CheckStuChooseMessage extends Box {
      * 点击删除按钮 调用此函数
      */
     public void delBtnClick(){
-
+        if(table.getSelectedColumn() == -1){
+            JOptionPane.showMessageDialog(jf, "请选中表格的数据!");
+            return;
+        }
+        int id = (int)tableData.get(table.getSelectedRow()).get(0);
+        StudentServiceImpl studentService = new StudentServiceImpl();
+        studentService.deleteTutorStu(id);
+        initTable();
+        JOptionPane.showMessageDialog(jf, "删除成功!");
     }
 
 
