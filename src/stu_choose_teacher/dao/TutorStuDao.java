@@ -91,7 +91,7 @@ public class TutorStuDao {
      * @param tutor_stu_id
      */
     public void deleteTutorStu(int tutor_stu_id){
-        String sql = "delete tb_jk2_tutor_stu where tutor_stu_id = ?";
+        String sql = "delete FROM tb_jk2_tutor_stu where tutor_stu_id = ?";
 
         template.update(sql,tutor_stu_id);
     }
