@@ -2,7 +2,6 @@ package stu_choose_teacher.choice.StuToTea.components;
 
 import stu_choose_teacher.Impl.StudentServiceImpl;
 import stu_choose_teacher.choice.StuToTea.dialog.SelectTeaDialog;
-import stu_choose_teacher.choice.StuToTea.dialog.UpdateTeaDialog;
 import stu_choose_teacher.domain.ChooseMessage;
 import stu_choose_teacher.domain.Student;
 import stu_choose_teacher.utils.TableUtil;
@@ -105,7 +104,7 @@ public class CheckStuChooseMessage extends Box {
 
     public void onTableRowClick(int teach_num){
         System.out.println(teach_num);
-        new UpdateTeaDialog(jf, false, "选择老师", teach_num, user.getStu_id()).setVisible(true);
+        new SelectTeaDialog(jf, false, "选择老师", teach_num, user.getStu_id()).setVisible(true);
     }
 
     private Vector<String> getTableTitle(){
