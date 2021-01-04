@@ -226,13 +226,10 @@ public class CheckStuChooseMessage extends Box {
         }
 
 
-        TutorStu tutorStu = new TutorStu();
 
         new ModifySelectTeaDialog(jf, true, "修改信息", id, user.getStu_id()).setVisible(true);
 
-//        StudentServiceImpl studentService = new StudentServiceImpl();
-//        studentService.deleteTutorStu(id);
-//        initTable();
+        initTable();
 //        JOptionPane.showMessageDialog(jf, "删除成功!");
     }
 

@@ -68,6 +68,24 @@ public class TutorStuDao {
                 tutorStu.getNotice_read_teacher_content(),tutor_stu_id);
     }
 
+    /**
+     * 修改表 tutorStu，根据表id
+     * @param tutor_stu_id  id
+     * @param intro         自我介绍
+     * @param message       信息
+     * @param isEmail       是否未email
+     */
+    public void updateTutorStuByMessage(int tutor_stu_id, String intro, String message, boolean isEmail){
+
+        String sql = "update tb_jk2_tutor_stu " +
+                        "set `stu_self_introduce`= ?," +
+                            "`notice_stu_content`= ?," +
+                            "`message_notice_guide_teacher`= ?," +
+                            "`email_notice_guide_teacher`= ? " +
+                        "where `tutor_stu_id` = ?";
+        template.update(sql, intro, message, isEmail? 0 : 1, isEmail? 1 : 0, tutor_stu_id);
+    }
+
     public TutorStu getTutorStu(int tutor_stu_id, int guide_adviser_id, int stu_id, String stu_self_introduce,
                                 int email_notice_guide_teacher, int message_notice_guide_teacher,
                                 String notice_guide_teacher_content, int guide_teacher_check){

@@ -2,7 +2,9 @@ package stu_choose_teacher.choice.StuToTea.dialog;
 
 import stu_choose_teacher.Impl.StudentServiceImpl;
 import stu_choose_teacher.dao.StudentDao;
+import stu_choose_teacher.dao.TutorStuDao;
 import stu_choose_teacher.domain.GuideAdviser;
+import stu_choose_teacher.domain.TutorStu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -76,6 +78,7 @@ public class ModifySelectTeaDialog extends JDialog {
         Box nameBox = Box.createHorizontalBox();
 
 
+
         //单选框
         Box radioBox = Box.createHorizontalBox();
         ButtonGroup group = new ButtonGroup();
@@ -87,7 +90,6 @@ public class ModifySelectTeaDialog extends JDialog {
         radioBox.add(email_radio);
         radioBox.add(Box.createHorizontalStrut(20));
         radioBox.add(message_radio);
-
 
 
 
@@ -116,7 +118,6 @@ public class ModifySelectTeaDialog extends JDialog {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("点击了");
                 String notice = noticeText.getText().trim();
                 String intro = introText.getText().trim();
                 if(intro.isEmpty()){
@@ -127,8 +128,8 @@ public class ModifySelectTeaDialog extends JDialog {
                     JOptionPane.showMessageDialog(jf, "请填写通知信息!");
                     return;
                 }
-                submit(email_radio.isSelected(), intro, notice);
-                JOptionPane.showMessageDialog(jf, "添加成功!");
+                submit(intro, notice, email_radio.isSelected());
+                JOptionPane.showMessageDialog(jf, "修改成功!");
             }
         });
 
@@ -140,23 +141,26 @@ public class ModifySelectTeaDialog extends JDialog {
 
         vbox.add(Box.createHorizontalStrut(15));
 
-
-
         vbox.add(radioBox);
+
+
+
+
         vbox.add(introBox);
+        vbox.add(Box.createHorizontalStrut(15));
         vbox.add(noticeBox);
+        vbox.add(Box.createHorizontalStrut(15));
         vbox.add(btnBox);
 
-        System.out.println("ok");
         //添加到该窗体中
         this.add(vbox);
     }
 
 
     //提交选择信息
-    private void submit(boolean isEmail, String intro, String notice){
-        StudentServiceImpl studentService = new StudentServiceImpl();
-        studentService.chooseGuide(stu_id, id, intro, isEmail? 1:0, isEmail? 0: 1, notice);
+    private void submit(String intro, String notice, boolean isEmail){
+        TutorStuDao tutorStu = new TutorStuDao();
+        tutorStu.updateTutorStuByMessage(id, intro, notice, isEmail);
     }
 
 
