@@ -1,10 +1,5 @@
 package stu_choose_teacher.choice.StuToTea;
 
-
-
-import com.sun.javafx.scene.shape.PathUtils;
-import stu_choose_teacher.choice.StuToTea.components.CheckAllAdviser;
-import stu_choose_teacher.choice.StuToTea.components.CheckStuChooseMessage;
 import stu_choose_teacher.choice.StuToTea.components.Index;
 import stu_choose_teacher.config.Config;
 import stu_choose_teacher.domain.Student;
@@ -16,8 +11,13 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import java.awt.*;
+import java.awt.geom.RoundRectangle2D;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,6 +58,10 @@ public class StuChTeaMainFrame extends JFrame {
         this.setLocation(getLocationX(), getLocationY());
         this.setBackground(Color.white);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        this.setUndecorated(true);
+        this.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+//        AWTUtilities.setWindowShape(this,
+//                new RoundRectangle2D.Double(0.0D, 0.0D, this.getWidth(), this.getHeight(), 20.0D, 20.0D));
     }
 
 
@@ -82,6 +86,7 @@ public class StuChTeaMainFrame extends JFrame {
         JPanel jPanel = new JPanel();
 //        Color base = new Color(52, 152, 219,50);
 //        jPanel.setBackground(base);
+        // jPanel.setBackground(new Color(255,255,255));
         String[] btnsText = getMenuBtnText();
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("管理");
         for(String text : btnsText){
@@ -98,9 +103,10 @@ public class StuChTeaMainFrame extends JFrame {
                 createNewFrame(lastPathComponent.toString());
             }
         });
+        // tree.setBackground(new Color(255,255,255));
 //        tree.setBackground(base);
-//        jPanel.add(tree);
-        return tree;
+        // jPanel.add(tree);
+        return jPanel;
     }
 
     private void conponentsInit(){
@@ -173,6 +179,15 @@ public class StuChTeaMainFrame extends JFrame {
 
 
     public static void main(String[] args) {
+//        try {
+//            JFrame.setDefaultLookAndFeelDecorated(true);
+//            UIManager.setLookAndFeel("com.jtattoo.plaf.mint.MintLookAndFeel");
+//            new StuChTeaMainFrame();
+//        }
+//        catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+
         new StuChTeaMainFrame();
     }
 
@@ -182,14 +197,13 @@ public class StuChTeaMainFrame extends JFrame {
         private Image rootIcon = null;
 
         public MenuBtnRenderer(){
-
-//            rootIcon = ImageIO.read("");
+//            rootIcon = ImageIO.read();
         }
 
         @Override
         public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
+//            this.setIcon(imageIcon);
             return super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
-
 //            this.setIcon(new ImageIcon("\\src\\stu_choose_teacher\\static\\index.png"));
         }
     }
