@@ -80,8 +80,8 @@ public class StuChTeaMainFrame extends JFrame {
      */
     private Component createLeftBar(){
         JPanel jPanel = new JPanel();
-        Color base = new Color(52, 152, 219,50);
-        jPanel.setBackground(base);
+//        Color base = new Color(52, 152, 219,50);
+//        jPanel.setBackground(base);
         String[] btnsText = getMenuBtnText();
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("管理");
         for(String text : btnsText){
@@ -98,9 +98,9 @@ public class StuChTeaMainFrame extends JFrame {
                 createNewFrame(lastPathComponent.toString());
             }
         });
-        tree.setBackground(base);
-        jPanel.add(tree);
-        return jPanel;
+//        tree.setBackground(base);
+//        jPanel.add(tree);
+        return tree;
     }
 
     private void conponentsInit(){
