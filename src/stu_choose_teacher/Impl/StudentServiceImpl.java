@@ -1,6 +1,4 @@
 package stu_choose_teacher.Impl;
-
-
 import org.springframework.jdbc.core.JdbcTemplate;
 import stu_choose_teacher.dao.GuideAdviserDao;
 import stu_choose_teacher.dao.SemesterDao;
@@ -28,6 +26,34 @@ public class StudentServiceImpl {
         List<GuideAndStudent> guideAndStudents = new ArrayList<GuideAndStudent>();
 
         List<GuideAdviser> guideAdvisers = guideAdviserDao.getGuideAdvisers(semester);
+
+        // 根据指导教师 通过导师学生表 搜索 已经选择的学生信息
+        for(GuideAdviser guideAdviser : guideAdvisers){
+            GuideAndStudent guideAndStudent = new GuideAndStudent();
+            guideAndStudent.setGuideAdviser(guideAdviser);
+            guideAndStudent.setSemester(semester);
+            List<Student> studentsByGuide = studentDao.getStudentsByGuide(guideAdviser.getGuide_adviser_id());
+            guideAndStudent.setStudents(studentsByGuide);
+            guideAndStudents.add(guideAndStudent);
+        }
+
+        return guideAndStudents;
+    }
+
+    /**
+     * 根据学期以及搜索内容，查看所有指导教师以及已经选择的学生信息
+     * @param semester
+     * @param searchValue
+     * @return
+     */
+    public List<GuideAndStudent> getGuideAndStudentsBySemester(Semester semester, String searchValue){
+        // 根据 学期 得到所有指导老师
+        GuideAdviserDao guideAdviserDao = new GuideAdviserDao();
+        StudentDao studentDao = new StudentDao();
+
+        List<GuideAndStudent> guideAndStudents = new ArrayList<GuideAndStudent>();
+
+        List<GuideAdviser> guideAdvisers = guideAdviserDao.getGuideAdvisers(semester,searchValue);
 
         // 根据指导教师 通过导师学生表 搜索 已经选择的学生信息
         for(GuideAdviser guideAdviser : guideAdvisers){

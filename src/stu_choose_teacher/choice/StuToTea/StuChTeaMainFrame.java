@@ -52,7 +52,7 @@ public class StuChTeaMainFrame extends JFrame {
      */
     private void FrameInit()
     {
-        this.setTitle(Config.FRAME_TITLE);
+        this.setTitle(Config.FRAME_TITLE); 
         this.setVisible(true);
         this.setSize(Config.FRAME_INIT_WEIGHT, Config.FRAME_INIT_HEIGHT);
         this.setLocation(getLocationX(), getLocationY());
@@ -86,7 +86,7 @@ public class StuChTeaMainFrame extends JFrame {
         JPanel jPanel = new JPanel();
 //        Color base = new Color(52, 152, 219,50);
 //        jPanel.setBackground(base);
-        // jPanel.setBackground(new Color(255,255,255));
+        jPanel.setBackground(new Color(255,255,255));
         String[] btnsText = getMenuBtnText();
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("管理");
         for(String text : btnsText){
@@ -103,9 +103,9 @@ public class StuChTeaMainFrame extends JFrame {
                 createNewFrame(lastPathComponent.toString());
             }
         });
-        // tree.setBackground(new Color(255,255,255));
+        tree.setBackground(new Color(255,255,255));
 //        tree.setBackground(base);
-        // jPanel.add(tree);
+        jPanel.add(tree);
         return jPanel;
     }
 
@@ -118,7 +118,6 @@ public class StuChTeaMainFrame extends JFrame {
         sp.setDividerSize(Config.DIVIDER_SIZE);
 
 //        JPanel rightBar = new JPanel();
-
 //        sp.setBackground(new Color(52, 152, 219, 50));
         sp.setLeftComponent(createLeftBar());
 //        CheckAllAdviser allAdviser = new CheckAllAdviser();

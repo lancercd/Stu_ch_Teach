@@ -2,6 +2,7 @@ package stu_choose_teacher.choice.StuToTea.dialog;
 
 import stu_choose_teacher.Impl.StudentServiceImpl;
 import stu_choose_teacher.config.Config;
+import stu_choose_teacher.dao.GuideAdviserDao;
 import stu_choose_teacher.dao.StudentDao;
 import stu_choose_teacher.domain.GuideAdviser;
 
@@ -33,7 +34,7 @@ public class SelectTeaDialog extends JDialog {
         //宽度 400px  高度300px
         this.setSize(400, 300);
 
-        FormatDate();
+        FormatDate(id);
 
         validateHasSelected();
     }
@@ -95,11 +96,6 @@ public class SelectTeaDialog extends JDialog {
         demandBox.add(Box.createHorizontalStrut(20));
         demandBox.add(demandText);
 
-
-
-
-
-
         //单选框
         Box radioBox = Box.createHorizontalBox();
         ButtonGroup group = new ButtonGroup();
@@ -111,11 +107,6 @@ public class SelectTeaDialog extends JDialog {
         radioBox.add(email_radio);
         radioBox.add(Box.createHorizontalStrut(20));
         radioBox.add(message_radio);
-
-
-
-
-
 
         //消息内容
         Box introBox = Box.createHorizontalBox();
@@ -186,11 +177,15 @@ public class SelectTeaDialog extends JDialog {
     }
 
 
-    private void FormatDate(){
+    private void FormatDate(int id){
         GuideAdviser data = new GuideAdviser();
-        data.setTeacher_name("lc");
-        data.setTeacher_number(456789);
-        data.setGuide_adviser_demand("要求各种个样子那个的撒发达发");
+
+        GuideAdviserDao guideAdviserDao = new GuideAdviserDao();
+        GuideAdviser guideAdviser = guideAdviserDao.getGuideAdviser(id);
+
+        data.setTeacher_name(guideAdviser.getTeacher_name());
+        data.setTeacher_number(guideAdviser.getTeacher_number());
+        data.setGuide_adviser_demand(guideAdviser.getGuide_adviser_demand());
 
         this.data = data;
 

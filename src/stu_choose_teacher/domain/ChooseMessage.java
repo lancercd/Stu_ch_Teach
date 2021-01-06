@@ -39,7 +39,7 @@ public class ChooseMessage {
         data.add(guideAdviser.getTeacher_name());
         data.add(FormData.check_tea_validate_status(tutorStu.getGuide_teacher_check()));
         data.add(guideAdviser.getGuide_adviser_demand());
-        data.add(FormData.check_notice_type(tutorStu.getMessage_notice_guide_teacher(), tutorStu.getEmail_notice_read_teacher()));
+        data.add(FormData.check_notice_type(tutorStu.getMessage_notice_guide_teacher(), tutorStu.getEmail_notice_guide_teacher()));
         data.add(tutorStu.getNotice_stu_content());
         data.add(tutorStu.getStu_self_introduce());
         data.add(FormData.notice_message_to_string(tutorStu.getMessage_notice_stu()));

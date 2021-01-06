@@ -57,13 +57,12 @@ public class CheckAllAdviser extends Box {
         this.user = user;
     }
 
-
-    public void initTable(Semester semester){
+    public void initTable(Semester semester, String searchValue){
         //table title
         Vector<String> vh = getTableTitle();
 
         //table body
-        tableData = requestData(semester);
+        tableData = requestData(semester, searchValue);
 
         tableModel = new DefaultTableModel(tableData, vh);
         table.setModel(tableModel);
@@ -102,10 +101,15 @@ public class CheckAllAdviser extends Box {
 
             }
         });
+    }
 
+
+    public void initTable(Semester semester){
+        initTable(semester,null);
     }
 
     public void onTableRowClick(int teach_num){
+
         new SelectTeaDialog(jf, false, "选择老师", teach_num, user.getStu_id()).setVisible(true);
     }
 
@@ -143,8 +147,6 @@ public class CheckAllAdviser extends Box {
         JLabel title = new JLabel(boxTitle);
         title.setFont(new Font("黑体", Font.BOLD, 20));
         title.setFont(new Font("黑体", Font.BOLD, 30));
-        leftPanel.add(title);
-
 
         //中间选择学期部分
         JLabel label = new JLabel("选择学期");
@@ -173,6 +175,7 @@ public class CheckAllAdviser extends Box {
 
 
         //添加到容器中
+        leftPanel.add(title);
         rightPanel.add(label);
         rightPanel.add(select);
         headerPanel.add(leftPanel);
@@ -180,9 +183,38 @@ public class CheckAllAdviser extends Box {
         headerPanel.add(btnPanel);
         this.add(headerPanel);
 
+        // 添加搜索框及按钮
+        JPanel searchPanel = new JPanel();
+
+        searchPanel.setMaximumSize(new Dimension(800, 200));
+        searchPanel.setLayout(new GridLayout(1, 3));
+
+//        JLabel jLabel_input = new JLabel("请输入：  ");
+//        JTextArea jTextArea = new JTextArea();
+        JTextField jTextField = new JTextField();
+        JButton search_button = new JButton("搜索");
+
+        BtnFaceUtil.btnFace(search_button, new Color(200,200,200), new Color(0,0,0));
+        search_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                searchGuide((Semester) select.getSelectedItem(), jTextField.getText());
+            }
+        });
+
+
+//        searchPanel.add(jLabel_input);
+        searchPanel.add(jTextField);
+        searchPanel.add(search_button);
+        this.add(searchPanel);
 
         initTable((Semester) select.getSelectedItem());
         this.add( new JScrollPane(table) ); //要用JScrollPane包才会显示出表头
+    }
+
+    public void searchGuide(Semester semester, String searchValue){
+        String str = semester.getSemester_name() + searchValue;
+        initTable(semester,searchValue);
     }
 
     public void setSemester(JComboBox ComboBox){
@@ -227,11 +259,11 @@ public class CheckAllAdviser extends Box {
     }
 
 
-    public Vector<Vector<Object>> requestData(Semester semester){
+    public Vector<Vector<Object>> requestData(Semester semester, String searchValue){
         Vector<Vector<Object>> data = new Vector<Vector<Object>>();
         StudentServiceImpl stu = new StudentServiceImpl();
 
-        List<GuideAndStudent> guideAndStudents = stu.getGuideAndStudentsBySemester(semester);
+        List<GuideAndStudent> guideAndStudents = stu.getGuideAndStudentsBySemester(semester,searchValue);
 
         for(GuideAndStudent ele : guideAndStudents){
             Vector<Object> row = ele.dataFormat();

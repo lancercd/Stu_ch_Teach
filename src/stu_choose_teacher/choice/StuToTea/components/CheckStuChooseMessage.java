@@ -48,7 +48,6 @@ public class CheckStuChooseMessage extends Box {
 
     }
 
-
     public void init(JFrame jf){
         this.jf = jf;
         table = new JTable(tableModel){
@@ -165,8 +164,6 @@ public class CheckStuChooseMessage extends Box {
         btnPanel.add(delBtn);
         btnPanel.add(modifyBtn);
 
-
-
         //添加到容器中
         rightPanel.add(label);
         rightPanel.add(label);
@@ -200,13 +197,12 @@ public class CheckStuChooseMessage extends Box {
         if(!tableIsSelected()) return;
 
 
-        String check_status = (String)tableData.get(table.getSelectedRow()).get(4);
+        String check_status = (String)tableData.get(table.getSelectedRow()).get(3);
 
         if(!check_status.equals("待审核")){
             JOptionPane.showMessageDialog(jf, "已确认无法修改!");
             return;
         }
-
 
 
         int id = (int)tableData.get(table.getSelectedRow()).get(0);
@@ -224,10 +220,12 @@ public class CheckStuChooseMessage extends Box {
         if(!tableIsSelected()) return;
         int id = (int)tableData.get(table.getSelectedRow()).get(0);
         String adviser_check = (String)tableData.get(table.getSelectedRow()).get(3);
-        String message = (String)tableData.get(table.getSelectedRow()).get(6);
-        String intro = (String)tableData.get(table.getSelectedRow()).get(7);
         String message_check = (String)tableData.get(table.getSelectedRow()).get(8);
         String email_check = (String)tableData.get(table.getSelectedRow()).get(9);
+
+        String email_message = (String) tableData.get(table.getSelectedRow()).get(5);
+        String message = (String)tableData.get(table.getSelectedRow()).get(6);
+        String intro = (String)tableData.get(table.getSelectedRow()).get(7);
 
         if(adviser_check.equals("已确认")){
             JOptionPane.showMessageDialog(jf, "导师已确认无法修改!");
@@ -238,15 +236,21 @@ public class CheckStuChooseMessage extends Box {
             return;
         }
 
+        int email_message_state = 0;
+        if(email_message.equals("短信通知")){
+            email_message_state = 2;
+        }else if(email_message.equals("邮件通知")){
+            email_message_state = 1;
+        }
 
+        System.out.println(email_message_state);
 
-        new ModifySelectTeaDialog(jf, true, "修改信息", id, user.getStu_id()).setVisible(true);
+        new ModifySelectTeaDialog(jf, true, "修改信息", id, user.getStu_id(), email_message_state,
+                message, intro).setVisible(true);
 
         initTable();
 //        JOptionPane.showMessageDialog(jf, "删除成功!");
     }
-
-
 
 
 
@@ -260,8 +264,9 @@ public class CheckStuChooseMessage extends Box {
             data.add(row);
         }
         return data;
-
     }
+
+
 
 }
 

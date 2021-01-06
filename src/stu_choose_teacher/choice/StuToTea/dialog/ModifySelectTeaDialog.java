@@ -12,10 +12,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ModifySelectTeaDialog extends JDialog {
-    //   指导老师id
+    //   教师学生表id
     int id;
     //    用户id
     int stu_id;
+    //  是否邮箱/短信通知状态（email：2，message：1，both none：0）
+    int email_message_state;
+    // 通知内容
+    String message;
+    // 自我介绍
+    String intro;
+
     //    信息
     GuideAdviser data;
 
@@ -24,17 +31,22 @@ public class ModifySelectTeaDialog extends JDialog {
 
     JFrame jf;
 
-    public ModifySelectTeaDialog(JFrame jf, boolean isModel, String title, int id, int stu_id){
+    public ModifySelectTeaDialog(JFrame jf, boolean isModel, String title, int id, int stu_id,
+                                 int state, String message, String intro){
         super(jf, title, isModel);
         this.id = id;
         this.stu_id = stu_id;
+        this.email_message_state = state;
+        this.message = message;
+        this.intro = intro;
+
         this.jf = jf;
         this.setLocation(getLocationX() - 200, getLocationY() - 150);
 
         //宽度 400px  高度300px
         this.setSize(400, 300);
 
-        FormatDate();
+//        FormatDate();
 
         validateHasSelected();
     }
@@ -82,18 +94,24 @@ public class ModifySelectTeaDialog extends JDialog {
         //单选框
         Box radioBox = Box.createHorizontalBox();
         ButtonGroup group = new ButtonGroup();
-        email_radio = new JRadioButton("邮件通知", true);
-        message_radio = new JRadioButton("短信通知");
+
+        if(email_message_state == 0){
+            email_radio = new JRadioButton("邮件通知");
+            message_radio = new JRadioButton("短信通知");
+        } else if(email_message_state == 2){
+            email_radio = new JRadioButton("邮件通知");
+            message_radio = new JRadioButton("短信通知", true);
+        } else if(email_message_state == 1){
+            email_radio = new JRadioButton("邮件通知", true);
+            message_radio = new JRadioButton("短信通知");
+        }
+
         group.add(email_radio);
         group.add(message_radio);
 
         radioBox.add(email_radio);
         radioBox.add(Box.createHorizontalStrut(20));
         radioBox.add(message_radio);
-
-
-
-
 
         //消息内容
         Box introBox = Box.createHorizontalBox();
@@ -110,6 +128,9 @@ public class ModifySelectTeaDialog extends JDialog {
         noticeBox.add(noticeLabel);
         noticeBox.add(Box.createHorizontalStrut(20));
         noticeBox.add(noticeText);
+
+        introText.setText(intro);
+        noticeText.setText(message);
 
         //按钮
         Box btnBox = Box.createHorizontalBox();
@@ -164,15 +185,15 @@ public class ModifySelectTeaDialog extends JDialog {
     }
 
 
-    private void FormatDate(){
-        GuideAdviser data = new GuideAdviser();
-        data.setTeacher_name("lc");
-        data.setTeacher_number(456789);
-        data.setGuide_adviser_demand("要求");
-
-        this.data = data;
-
-    }
+//    private void FormatDate(){
+//        GuideAdviser data = new GuideAdviser();
+//        data.setTeacher_name("lc");
+//        data.setTeacher_number(456789);
+//        data.setGuide_adviser_demand("要求");
+//
+//        this.data = data;
+//
+//    }
 
     private int getLocationX(){
         return ((Toolkit.getDefaultToolkit().getScreenSize().width)/2);
