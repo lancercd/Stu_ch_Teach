@@ -2,6 +2,7 @@ package stu_choose_teacher.choice.StuToTea;
 
 import stu_choose_teacher.choice.StuToTea.components.Index;
 import stu_choose_teacher.config.Config;
+import stu_choose_teacher.dao.StudentDao;
 import stu_choose_teacher.domain.Student;
 
 import javax.imageio.ImageIO;
@@ -10,6 +11,7 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.undo.UndoManager;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.io.File;
@@ -18,6 +20,8 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,11 +33,9 @@ public class StuChTeaMainFrame extends JFrame {
     /**
      * 当前用户
      */
-    public StuChTeaMainFrame(){
-        this.user = new Student();
-        this.user.setStu_id(1);
+    public StuChTeaMainFrame(int stu_id){
+        this.user = new StudentDao().getStudent(stu_id);
         this.init();
-
     }
 
     /**
@@ -187,7 +189,7 @@ public class StuChTeaMainFrame extends JFrame {
 //            ex.printStackTrace();
 //        }
 
-        new StuChTeaMainFrame();
+        new StuChTeaMainFrame(1);
     }
 
 
